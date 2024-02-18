@@ -1,0 +1,23 @@
+{
+  "name": "Project-express-mongoDB",
+  "version": "1.0.0",
+  "description": "Express Api for conection to mongodb",
+  "main": "index.js",
+  "author": "Danval-Adrian-Andrea",
+  "license": "MIT",
+  "dependencies": {
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prefer-arrow-functions": "^3.2.4"
+  }
+}
