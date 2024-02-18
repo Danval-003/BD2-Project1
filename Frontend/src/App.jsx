@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // eslint-disable-next-line import/no-unresolved
 import viteLogo from '@public/vite.svg'
 import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.scss'
 
 const App = () => {
   const [count, setCount] = useState(0)
