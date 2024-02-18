@@ -1,3 +1,12 @@
 /Backend/node_modules
 /Frontend/node_modules
+
+
+/Backend/logs
+/Backend/*.log
+/Backend/npm-debug.log*
+/Backend/yarn-debug.log*
+/Backend/yarn-error.log*
+/Backend/pnpm-debug.log*
+/Backend/lerna-debug.log*
 ```
