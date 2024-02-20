@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 async function generateComponent(componentName) {
-  const componentPath = path.join('src', 'components/', componentName)
+  const componentPath = path.join('src', 'pages/', componentName)
 
   // Crea la carpeta del componente
   await fs.mkdir(componentPath)
