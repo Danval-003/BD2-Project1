@@ -9,6 +9,7 @@ const App = () => {
 
   const componentDict = {
     principal: Principal,
+    principal2: Principal,
     secundary: Secundary,
   }
 
