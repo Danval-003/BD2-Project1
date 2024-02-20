@@ -1,41 +1,22 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react'
-// eslint-disable-next-line import/no-unresolved
-import viteLogo from '@public/vite.svg'
-import reactLogo from './assets/react.svg'
+import { Menu } from '@components'
+import { Principal, Secundary } from '@pages'
 import './App.scss'
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const [actualPage, setActualPage] = useState('principal')
+
+  const componentDict = {
+    principal: Principal,
+    secundary: Secundary,
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((c) => c + 1)} type="button">
-          count is
-          {' '}
-          {count}
-        </button>
-        <p>
-          Edit
-          {' '}
-          <code>src/App.jsx</code>
-          {' '}
-          and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <Menu actualPage={actualPage} setActualPage={setActualPage} dataList={Object.keys(componentDict)} />
+      {React.createElement(componentDict[actualPage])}
+    </div>
   )
 }
 

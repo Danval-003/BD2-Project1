@@ -1,0 +1,58 @@
+@import './../../Colors.scss';
+
+.menu{
+    background-color: $principal-color;
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 0;
+
+    & .title{
+        font-size: 200%;
+        color: $secundary-color;
+        margin-left: 2%;
+        font-weight: bold;
+    }
+}
+
+
+.menu_button{
+    background-color: $button-color;
+    color: $secundary-color;
+    width:15%;
+    height: 50%;
+    border-radius: 10px;
+    border: none;
+    margin-right: 2%;
+    &:nth-child(2){
+        margin-left: 3%;
+    }
+    cursor: pointer;
+    font-size: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.3s;
+
+    &:hover{
+        background-color: $secundary-color;
+        color: $principal-color;
+    }
+
+    &:active{
+        background-color: $principal-color;
+        color: $secundary-color;
+        outline: none;
+        border: none;
+    }
+
+    &:focus{
+        outline: none;
+        border: none;
+    }
+}
+
