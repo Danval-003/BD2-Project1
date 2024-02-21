@@ -11,18 +11,18 @@ const Ranking = ({
       <span>{nameN}</span>
       <span>{scoreName}</span>
     </div>
-    <ul>
-      {rankList.map((rank, index) => (
-        <li key={index}>
+    <div className="container-list">
+      {rankList.map((rank) => (
+        <div className="list-element">
           <span>
             {rank.name}
           </span>
           <span>
             {rank.score}
           </span>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   </div>
 )
 

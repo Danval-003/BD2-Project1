@@ -1,18 +1,22 @@
 @import '../../Colors.scss';
 
 .ranking{
-    width: 25%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     display: block;
     background-color: $black;
-    border-radius: 1vw;
+    margin: 0;
+    border-radius: 10% 10% 10% 10%;
     color: $white;
-    font-size: 3er;
+    font-size: 120%;
+    position: relative;
+    top: -4%;
     & h2{
         width: 100%;
         height: 10%;
         display: block;
-    }
+        padding-top: 5%;
+        }
     & h2::after{
         content: "";
         display: block;
@@ -24,7 +28,45 @@
 
     }
 
-    & ul{
+    & .header{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 115%;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: -2%;
+        margin-bottom: 4%;
+        & span{
+            width: 50%;
+            display: block;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background-color: $white;
+            color: $black;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            
+        }
+    }
+
+    & .container-list{
         list-style-type: decimal;
+        & .list-element{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            & span{
+                width: 50%;
+                display: block;
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+                padding-top: 3%;
+                padding-bottom: 2%;
+            }
+        }
     }
 }
