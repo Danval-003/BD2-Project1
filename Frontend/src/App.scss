@@ -46,7 +46,7 @@
 
 
 .app{
-  background-color: $secundary-color;
+  background-color: $white;
   color: black;
   width: 100vw;
   height: 100vh;
@@ -54,7 +54,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: inherit;
 }
 
 .content{

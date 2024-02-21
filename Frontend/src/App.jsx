@@ -1,13 +1,14 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react'
 import { Menu } from '@components'
-import { Chars, Rankings } from '@pages'
+import { Chars, Rankings, Queries } from '@pages'
 import './App.scss'
 
 const App = () => {
   const [actualPage, setActualPage] = useState('chars')
 
   const componentDict = {
+    queries: Queries,
     chars: Chars,
     rankings: Rankings,
   }

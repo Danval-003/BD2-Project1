@@ -1,7 +1,7 @@
 @import './../../Colors.scss';
 
 .menu{
-    background-color: $principal-color;
+    background-color: $main-color;
     position: static;
     top: 0;
     left: 0;
@@ -13,19 +13,18 @@
     margin: 0;
 
     & .title{
-        font-size: 200%;
-        color: $secundary-color;
+        font-size: 150%;
+        color: $white;
         margin-left: 2%;
         font-weight: bold;
     }
 }
 
-
 .menu_button{
-    background-color: $secundary-color;
+    background-color: $white;
     color: $button-color;
     width:15%;
-    height: 50%;
+    height: 40%;
     
     border: none;
     border-radius: 0;
@@ -47,13 +46,13 @@
     transition: 0.3s;
 
     &:hover{
-        background-color: $secundary-color;
-        color: $principal-color;
+        background-color: $white;
+        color: $main-color;
     }
 
     &:active{
         background-color: $button-color;
-        color: $secundary-color;
+        color: $white;
         outline: none;
         border: none;
     }
@@ -65,7 +64,7 @@
 
     &.active{
         background-color: $button-color;
-        color: $secundary-color;
+        color: $white;
     }
 }
 

@@ -10,7 +10,7 @@ const Menu = ({ dataList, setActualPage, actualPage }) => {
   return (
     <div className="menu">
       <div className="title">
-        Escolar Administrator Web
+        School Administrator
       </div>
       {dataList.map((page) => (
         <button
