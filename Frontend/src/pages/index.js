@@ -1,4 +1,6 @@
-import Principal from './Principal'
-import Secundary from './Secundary'
+import Rankings from './Rankings'
+import Chars from './Chars'
 
-export { Principal, Secundary }
+export {
+  Rankings, Chars,
+}

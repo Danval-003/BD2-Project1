@@ -1,22 +1,23 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react'
 import { Menu } from '@components'
-import { Principal, Secundary } from '@pages'
+import { Chars, Rankings } from '@pages'
 import './App.scss'
 
 const App = () => {
-  const [actualPage, setActualPage] = useState('principal')
+  const [actualPage, setActualPage] = useState('chars')
 
   const componentDict = {
-    principal: Principal,
-    principal2: Principal,
-    secundary: Secundary,
+    chars: Chars,
+    rankings: Rankings,
   }
 
   return (
     <div className="app">
       <Menu actualPage={actualPage} setActualPage={setActualPage} dataList={Object.keys(componentDict)} />
-      {React.createElement(componentDict[actualPage])}
+      <div className="content">
+        {React.createElement(componentDict[actualPage])}
+      </div>
     </div>
   )
 }
