@@ -5,7 +5,7 @@ const courseSchema = new mongoose.Schema({
     section: String,
     idCourse: String,
     year: Number,
-    percentGrade: Number
+    percentGrade: Number,
 });
 
 const studentSchema = new mongoose.Schema({

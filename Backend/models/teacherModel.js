@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-const courseSchema = new Schema({
+const courseSchema = new mongoose.Schema({
     idCourse: String,
     name: String,
     year: Number,
     idGrade: String,
     gradeSection: String,
-    performance: Number
+    performance: Number,
 });
 
-const teacherSchema = new Schema({
+const teacherSchema = new mongoose.Schema({
     gender: String,
     fullName: String,
     age: Number,

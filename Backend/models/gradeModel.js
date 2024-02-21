@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const gradeSchema = new Schema({
+const gradeSchema = new mongoose.Schema({
     idGrade: String,
     name: String,
 });

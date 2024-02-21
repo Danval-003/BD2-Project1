@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schoolSchema = new Schema({
+const schoolSchema = new mongoose.Schema({
     idSchool: String,
     location: {
         State: String,
@@ -9,5 +9,5 @@ const schoolSchema = new Schema({
     }
 });
 
-export const SchoolLocation = mongoose.model('School', schoolSchema);
+export const School = mongoose.model('School', schoolSchema);
 
