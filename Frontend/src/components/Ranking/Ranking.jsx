@@ -4,7 +4,7 @@ import './Ranking.scss'
 import { useSpring, animated } from 'react-spring'
 
 const Ranking = ({
-  titleName, rankList, nameN, scoreName, onClick,
+  titleName, rankList, nameN, scoreName,
 }) => {
   const [show, setShown] = useState(false)
   const props3 = useSpring({
@@ -20,21 +20,20 @@ const Ranking = ({
       style={props3}
       onMouseEnter={() => setShown(true)}
       onMouseLeave={() => setShown(false)}
-      onClick={onClick}
     >
 
       <h2>{titleName}</h2>
       <div className="header">
         <span>{nameN}</span>
-        <span>{scoreName}</span>
+        <span className="score">{scoreName}</span>
       </div>
       <div className="container-list">
         {rankList.map((rank) => (
           <div className="list-element">
-            <span>
+            <span className="name">
               {rank.name}
             </span>
-            <span>
+            <span className="score">
               {rank.score}
             </span>
           </div>
@@ -52,7 +51,6 @@ Ranking.propTypes = {
   })),
   nameN: PropTypes.string,
   scoreName: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
 
 }
 
