@@ -1,22 +1,42 @@
 /* eslint-disable import/no-unresolved */
-import React, { useState } from 'react'
+import React from 'react'
 import './Rankings.scss'
-import { Ranking } from '@components'
+import { Ranking, Carrousel } from '@components'
 
 const Rankings = () => {
   const elements = [<Ranking />, <Ranking />, <Ranking />]
+  const cards = [
+    {
+      key: 1,
+      content: (
+        <div className="rank">
+          <Ranking />
+        </div>
+      ),
+    },
+    {
+      key: 2,
+      content: (
+        <div className="rank">
+          <Ranking />
+        </div>
+      ),
+    },
+    {
+      key: 3,
+      content: (
+        <div className="rank">
+          <Ranking />
+        </div>
+      ),
+    },
+  ]
 
   return (
     <div className="rankings">
-      {elements.map((element) => {
-
-        return(
-          <div className='rank'>
-            {element}
-          </div>
-          )
-        
-        })}
+      <div className="carrousel-container">
+        <Carrousel cards={cards} offset={2} />
+      </div>
     </div>
 
   )

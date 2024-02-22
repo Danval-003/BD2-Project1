@@ -1,30 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import './Ranking.scss'
+import { useSpring, animated } from 'react-spring'
 
 const Ranking = ({
-  titleName, rankList, nameN, scoreName,
-}) => (
-  <div className="ranking">
-    <h2>{titleName}</h2>
-    <div className="header">
-      <span>{nameN}</span>
-      <span>{scoreName}</span>
-    </div>
-    <div className="container-list">
-      {rankList.map((rank) => (
-        <div className="list-element">
-          <span>
-            {rank.name}
-          </span>
-          <span>
-            {rank.score}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-)
+  titleName, rankList, nameN, scoreName, onClick,
+}) => {
+  const [show, setShown] = useState(false)
+  const props3 = useSpring({
+    transform: show ? 'scale(1.03)' : 'scale(1)',
+    boxShadow: show
+      ? '0 20px 25px rgb(0 0 0 / 25%)'
+      : '0 2px 10px rgb(0 0 0 / 8%)',
+  })
+
+  return ((
+    <animated.div
+      className="ranking"
+      style={props3}
+      onMouseEnter={() => setShown(true)}
+      onMouseLeave={() => setShown(false)}
+      onClick={onClick}
+    >
+
+      <h2>{titleName}</h2>
+      <div className="header">
+        <span>{nameN}</span>
+        <span>{scoreName}</span>
+      </div>
+      <div className="container-list">
+        {rankList.map((rank) => (
+          <div className="list-element">
+            <span>
+              {rank.name}
+            </span>
+            <span>
+              {rank.score}
+            </span>
+          </div>
+        ))}
+      </div>
+    </animated.div>
+  ))
+}
 
 Ranking.propTypes = {
   titleName: PropTypes.string,
@@ -34,6 +52,7 @@ Ranking.propTypes = {
   })),
   nameN: PropTypes.string,
   scoreName: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 
 }
 
