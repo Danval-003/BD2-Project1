@@ -7,6 +7,8 @@ const schoolSchema = new mongoose.Schema({
         City: String,
         Street: String
     }
+}, {
+    versionKey: false
 });
 
 export const School = mongoose.model('School', schoolSchema);
