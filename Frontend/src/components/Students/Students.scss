@@ -1,0 +1,42 @@
+/* Students.scss */
+@import './../../Colors.scss';
+
+.tableview {
+    width: 90%;
+    height: 100%;
+    font-size: small;
+    border: 1px solid #B0B0B0;
+    border-collapse: collapse;
+}
+
+.tableHeaders {
+    display: flex;
+    flex-direction: row;
+    color: #979dac;
+    font-weight: 600;
+    border-bottom: 1px solid #B0B0B0;
+}
+
+.tableRows {
+    display: flex;
+    flex-direction: column;
+    color: $black;
+}
+
+.tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%; 
+}
+
+.th,
+.td {
+    padding: 4px 8px;
+    flex: 1; 
+    text-align: center; 
+}
+
+.tableview .tr:nth-child(even) {
+    background-color: #95b8d131; 
+}
