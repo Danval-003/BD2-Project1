@@ -1,0 +1,33 @@
+@import "../../Colors.scss";
+.chars{
+    width: 98%;
+    height: 75%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:0.5vw;
+    grid-template-rows: repeat(6, 1fr);
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-left: 1%;
+    &:last-child{
+        margin-bottom: 2%;
+    }
+}
+
+.chars-cont{
+    height: 88vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0.7vw; /* Ancho de la barra de scroll */
+    }
+    
+    &::-webkit-scrollbar-thumb {
+    background-color: rgba($black, 0.1); /* Color del fondo de la barra de scroll */
+    border-radius: 0.9vw; /* Bordes redondeados */
+    &:hover{
+        background-color: rgba($black, 0.3);
+    }
+
+    }
+}

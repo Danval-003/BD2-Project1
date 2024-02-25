@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import './Rankings.scss'
 import { Ranking, Carrousel } from '@components'
+import { LoadTemplate } from '@assets'
 import useApi2 from '../../hooks/useApi2'
 
 const Rankings = () => {
@@ -9,6 +10,7 @@ const Rankings = () => {
   const [count, SetCount] = useState(0)
   const [newCards, setNewCards] = useState([])
   const [carrousel, setCarrousel] = useState(<></>)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (count === 1) {
@@ -76,6 +78,7 @@ const Rankings = () => {
 
         return [newCard, ...newCards]
       })
+      setLoading(false)
     }
   }, [response])
 
@@ -95,10 +98,16 @@ const Rankings = () => {
   }, [carrouselKey])
 
   return (
-    <div className="rankings">
-      <div className="carrousel-container">
-        {carrousel}
-      </div>
+    <div className={`rankings ${loading ? 'loading' : ''}`}>
+      {loading ? (
+        <div className="load">
+          <img src={LoadTemplate} alt="Loading" />
+        </div>
+      ) : (
+        <div className="carrousel-container">
+          {carrousel}
+        </div>
+      )}
     </div>
 
   )
