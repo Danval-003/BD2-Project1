@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { useFetch } from "./useFetch";
+import { useEffect, useState } from 'react'
+import { useFetch } from './useFetch'
 
 function useAPI() {
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [showResultTable, setShowResultTable] = useState(false);
-  const { fetchRequest } = useFetch();
+  const [result, setResult] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [showResultTable, setShowResultTable] = useState(false)
+  const { fetchRequest } = useFetch()
 
   useEffect(() => {
-    if(result && showResultTable){
-      console.table(result);
+    if (result && showResultTable) {
+      console.table(result)
     }
   }, [result])
 
   const fetchAPI = async ({
     route,
-    method = "GET",
+    method = 'GET',
     body,
     headers,
     signal,
@@ -26,16 +26,16 @@ function useAPI() {
     log = false,
     showReply = false,
   }) => {
-    setLoading(true);
-    showReply ? setShowResultTable(true) : setShowResultTable(false);
-    if (log) console.log(`Fetching API to... 127.0.0.1:5555/${route}`);
+    setLoading(true)
+    showReply ? setShowResultTable(true) : setShowResultTable(false)
+    if (log) console.log(`Fetching API to... 127.0.0.1:5555/${route}`)
     try {
       const head3rs = {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...headers,
-      };
+      }
 
-      if (removeContentType) delete head3rs["Content-Type"];
+      if (removeContentType) delete head3rs['Content-Type']
 
       const reply = await fetchRequest({
         uri: `127.0.0.1:5555/${route}`,
@@ -43,28 +43,29 @@ function useAPI() {
         body,
         headers: head3rs,
         signal,
-      });
+      })
 
-      let response;
-      if (!parseText) response = reply;
-      else if (toJson) response = await reply.json();
-      else response = await reply.text();
+      let response
+      if (!parseText) response = reply
+      else if (toJson) response = await reply.json()
+      else response = await reply.text()
 
-      setResult(response ?? true);
+      setResult(response ?? true)
 
-      return response;
-
+      return response
     } catch (ex) {
       setError({
         status: ex?.status,
-        message: ex?.statusMessage ?? ex?.statusText ?? "Ocurrió un error.",
-      });
+        message: ex?.statusMessage ?? ex?.statusText ?? 'Ocurrió un error.',
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
-  return { result, error, loading, fetchAPI };
+  return {
+    result, error, loading, fetchAPI,
+  }
 }
 
-export { useAPI };
+export default useAPI
