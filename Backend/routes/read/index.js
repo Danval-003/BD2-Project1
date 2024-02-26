@@ -17,20 +17,22 @@ router.get('/:collection', async (req, res) => {
     }
 })
 
-router.get('/global/:collection/:term', async (req, res) => {
-    let baseLimit = 30
-    let interval = req.query.page ? req.query.page : 0
-    let allFields = {"$or": []}
+router.get('/search/:collection', async (req, res) => {
     try {
         let col = getCollection(req.params.collection)
-        console.log(col.schema.obj)
-        Object.keys(col.schema.obj).forEach((field) => {
-            let fieldMatch = {}
-            fieldMatch[field] = {"$regex": req.params.term}
-            allFields["$or"].push(fieldMatch)
-        })
-        console.log(allFields)
-        const result = await col.find(allFields).skip(interval*baseLimit).limit(baseLimit);
+        const result = await col.aggregate([
+            {$search: 
+                {
+                    index: "default",
+                    text: {
+                        query: req.query.q,
+                        path: {wildcard: "*"}
+                    }
+                }
+            },
+            { $limit: 300 }
+        ]);
+        console.log(result.length);
         res.json(result);
     } catch (err) {
         console.error(err);
