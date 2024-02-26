@@ -37,7 +37,7 @@ const columns = [
     {
         accessorKey: 'idSchool',
         header: 'School',
-        cell: (props) => <p>{props.getValue()}</p>
+        cell: (props) => <p>{props.getValue()?.idSchool}</p>
     }
 ];
 

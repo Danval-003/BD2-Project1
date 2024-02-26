@@ -37,14 +37,16 @@ function useAPI() {
 
       if (removeContentType) delete head3rs['Content-Type']
 
+      console.log(`http://localhost:5555/${route}`)
       const reply = await fetchRequest({
-        uri: `127.0.0.1:5555/${route}`,
+        uri: `http://localhost:5555/${route}`,
         method,
         body,
         headers: head3rs,
         signal,
       })
 
+      
       let response
       if (!parseText) response = reply
       else if (toJson) response = await reply.json()
@@ -54,6 +56,7 @@ function useAPI() {
 
       return response
     } catch (ex) {
+      console.log(ex)
       setError({
         status: ex?.status,
         message: ex?.statusMessage ?? ex?.statusText ?? 'Ocurrió un error.',

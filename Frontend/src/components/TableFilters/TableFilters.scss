@@ -2,9 +2,11 @@
 .tablefilters {
     width: auto;
     height: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   
   .tablefilters input::placeholder {
     color: #979dac;
   }
-  

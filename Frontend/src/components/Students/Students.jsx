@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Students.scss'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import columns from './columns.jsx'
+import TableFilters from '../TableFilters'
+import useAPI from '../../hooks/useAPI'
 
 const test = [
   {
@@ -61,8 +63,10 @@ const test = [
 ]
 
 function Students() {
-  const [data, setData] = useState(test);
+  const { fetchAPI, error, loading, result } = useAPI();
+  const [data, setData] = useState();
   const [columnFilters, setColumnFilters] = useState([]);
+
   const table = useReactTable({
     data,
     columns,
@@ -71,6 +75,33 @@ function Students() {
     },
     getCoreRowModel: getCoreRowModel()
   });
+
+  useEffect(() => {
+    if (error) {
+      console.error(`Error fetching data: `, error.status, error.message);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (result) setData(result);
+  }, [result])
+
+  const displayData = async (searchParam, collectionName) => {
+    console.log(collectionName)
+    await fetchAPI({
+      method: "GET",
+      route: `read/${collectionName}`,
+      body: searchParam,
+      log: false,
+      showReply: false,
+    });
+  };
+
+  useEffect(() => {
+    displayData(null,'student');
+    if (result) setData(result)
+  }, []);
+
 
   return (
     <div className="mainTableContainer">
@@ -89,7 +120,7 @@ function Students() {
             </div>
           ))}
         </div>
-        {data.length === 0 ? (
+        {!data ? (
           <div className="noResults">No results found.</div>
         ) : (
           <div className='tableRows'>
