@@ -17,7 +17,7 @@ const columns = [
     {
         accessorKey: 'eca',
         header: 'ECA',
-        cell: (props) => <p>{props.getValue()}</p>
+        cell: (props) => <p>{props.getValue().toString().toUpperCase()}</p>
     },
     {
         accessorKey: 'admissionYear',
