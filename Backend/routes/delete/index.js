@@ -3,12 +3,12 @@ import { getCollection } from '../../utils/collections.js'
 
 const router = express.Router()
 
-router.post('/:collection', async (req, res) => {
+router.delete('/:collection', async (req, res) => {
     try {
-        if(!req.body) throw new Error('Can not insert empty documents')
+        if(!req.body) throw new Error('Invalid body.')
         let documents = req.body
         let col = getCollection(req.params.collection)
-        const result = await col.insertMany(documents);
+        const result = await col.deleteOne(documents);
         res.json(result);
     } catch (err) {
         console.error(err);

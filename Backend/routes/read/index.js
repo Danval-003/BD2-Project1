@@ -4,7 +4,7 @@ import { getCollection } from '../../utils/collections.js'
 const router = express.Router()
 
 router.get('/:collection', async (req, res) => {
-    let baseLimit = 1000
+    let baseLimit = 30
     let interval = req.query.page ? req.query.page : 0
     try {
         let col = getCollection(req.params.collection)
@@ -18,7 +18,7 @@ router.get('/:collection', async (req, res) => {
 })
 
 router.get('/global/:collection/:term', async (req, res) => {
-    let baseLimit = 1000
+    let baseLimit = 30
     let interval = req.query.page ? req.query.page : 0
     let allFields = {"$or": []}
     try {

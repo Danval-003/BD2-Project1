@@ -53,4 +53,22 @@ router.get('/bestGrades', async (req, res) => {
     }
 });
 
+router.get('/bestStudents/limit', async (req, res) => {
+    try {
+        let col = getCollection('student');
+        const result = await col.aggregate([
+            { $unwind: "$courses" },
+            { $match: {"courses.year": 2023} },
+            { $group: {_id: {id:"$_id",student: "$fullName", admissionYear: '$admissionYear', gender:'$gender', gradeSection:'$gradeSection', idSchool: '$idSchool', idGrade: '$idGrade', eca: '$eca'}, mean: {$avg: "$courses.percentGrade"}} },
+            { $sort: {"mean": -1} },
+            { $limit: 5 },
+            { $project: {'_id': 0, _id: "$_id.id", student: '$_id.student', gender:'$_id.gender', gradeSection:'$_id.gradeSection', idSchool: '$_id.idSchool', idGrade: '$_id.idGrade', eca: '$_id.eca', actualMean: {$round: ['$mean', 2]}} },
+        ]);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+})
+
 export default router
