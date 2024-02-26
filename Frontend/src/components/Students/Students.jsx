@@ -1,66 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './Students.scss'
-import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table'
 import columns from './columns.jsx'
 import TableFilters from '../TableFilters'
 import useAPI from '../../hooks/useAPI'
-
-const test = [
-  {
-    _id: { $oid: '65d5a6bc548d36f811c45695' },
-    gender: 'M',
-    fullName: 'Milo Traetta',
-    age: '16',
-    eca: 'False',
-    admissionYear: '2020',
-    gradeSection: 'A',
-    idGrade: 'SEC03',
-    courses: [
-      {
-        idGrade: 'PRI08',
-        section: 'B',
-        idCourse: 'ART009',
-        percentGrade: { $numberDouble: '43.45' },
-        year: { $numberInt: '2021' },
-      },
-      {
-        idGrade: 'PRI08',
-        section: 'B',
-        idCourse: 'MUS010',
-        percentGrade: { $numberDouble: '77.11' },
-        year: { $numberInt: '2021' },
-      },
-      {
-        idGrade: 'SEC03',
-        section: 'A',
-        idCourse: 'PHI020',
-        year: { $numberInt: '2024' },
-        percentGrade: null,
-      },
-    ],
-    idSchool: 'ETA_IL',
-  },
-  {
-    _id: { $oid: '65d5a6bc548d36f811c456a9' },
-    gender: 'M',
-    fullName: 'Larry Woods',
-    age: '12',
-    eca: 'False',
-    admissionYear: '2012',
-    gradeSection: 'C',
-    idGrade: 'PRI07',
-    courses: [
-      {
-        idGrade: 'PRI07',
-        section: 'C',
-        idCourse: 'MAT001',
-        percentGrade: null,
-        year: { $numberInt: '2024' },
-      },
-    ],
-    idSchool: 'ETA_NY',
-  },
-]
+import { Input, Button, ButtonGroup, Text} from '@chakra-ui/react'
 
 function Students() {
   const { fetchAPI, error, loading, result } = useAPI();
@@ -73,7 +17,8 @@ function Students() {
     state:{
       columnFilters,
     },
-    getCoreRowModel: getCoreRowModel()
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   });
 
   useEffect(() => {
@@ -98,7 +43,7 @@ function Students() {
   };
 
   useEffect(() => {
-    displayData(null,'student');
+    displayData(null,'students');
     if (result) setData(result)
   }, []);
 
@@ -139,6 +84,28 @@ function Students() {
           </div>
         )}
       </div>
+      <Text>
+        Page {table.getState().pagination.pageIndex + 1} of {""}
+        {table.getPageCount()}
+      </Text>
+      <ButtonGroup>
+        <Button
+        onClick = {
+          () => table.previousPage()
+        }
+        isDisabled ={
+          !table.getCanPreviousPage()
+        }
+        >{'<'}</Button>
+        <Button
+        onClick = {
+          () => table.nextPage()
+        }
+        isDisabled ={
+          !table.getCanNextPage()
+        }
+        >{'>'}</Button>
+      </ButtonGroup>
     </div>
   )
 }
