@@ -8,7 +8,7 @@ import {
 
   import { GoKebabHorizontal, GoTrash, GoPencil } from "react-icons/go";
   
-  const columns = [
+  const columns = (handleEdit, handleDelete) => [
     {
       accessorKey: 'gender',
       header: 'Gender',
@@ -52,6 +52,8 @@ import {
     {
       id: 'actions',
       cell: (props) => {
+        const student = props.row.original
+        
         return (
         <Menu  m="auto" zIndex="dropdown"> 
             <MenuButton
@@ -62,12 +64,14 @@ import {
               variant='outline'
               boxSize={25}
             />
-            <MenuList borderRadius="10px" border="1px solid #CBD5E0" zIndex='20'>
-              <MenuItem icon={<GoPencil size={'18px'} />}>
-                Edit Element
+            <MenuList bg={'white'} borderRadius="10px" border="1px solid #CBD5E0" zIndex='20'>
+              <MenuItem 
+                icon={<GoPencil size={'18px'} />}
+                onClick={() => handleEdit(student._id)}> Edit Element
               </MenuItem>
-              <MenuItem icon={<GoTrash size={'18px'} />}>
-                Delete Element
+              <MenuItem 
+                icon={<GoTrash size={'18px'} />}
+                onClick={() => handleDelete(student._id)}> Delete Element
               </MenuItem>
             </MenuList>
           </Menu>

@@ -39,10 +39,18 @@ function Students() {
       displayData(searchParam, 'students');
     }
   }, [searchParam]);
-  
+
+  const handleEdit = (idElement) => {
+    console.log('Editing element with ID:', idElement);
+  };
+
+  const handleDelete = (idElement) => {
+    console.log('Deleting element with ID:', idElement);
+  };
+    
   const table = useReactTable({
     data,
-    columns,
+    columns: columns(handleEdit, handleDelete),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel()
   });
