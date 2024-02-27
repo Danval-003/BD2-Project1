@@ -80,5 +80,12 @@ import {
     },
   ];
   
-  export default columns;
+
+  const columnsDict = {
+    gender: ['Gender','text' ],
+    fullName: ['Full Name','text'],
+    age: ['Age','number']
+  };
+
+  export { columns, columnsDict };
   

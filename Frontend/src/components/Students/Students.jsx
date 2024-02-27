@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './Students.scss'
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table'
-import columns from './columns.jsx'
+import {columns, columnsDict} from './columns.jsx'
 import TableFilters from '../TableFilters'
 import useAPI from '../../hooks/useAPI'
-import { Spinner, Button, ButtonGroup, Text } from '@chakra-ui/react'
+import {Button, ButtonGroup, Text } from '@chakra-ui/react'
+import TableForm from '../TableForm/TableForm'
 
 function Students() {
   const { fetchAPI, error, loading, result } = useAPI();
@@ -41,6 +42,7 @@ function Students() {
   }, [searchParam]);
 
   const handleEdit = (idElement) => {
+    console.log(columnsDict)
     console.log('Editing element with ID:', idElement);
   };
 
@@ -121,6 +123,7 @@ function Students() {
           </React.Fragment>
         )}
       </div>
+      <TableForm columns={columnsDict}/>
     </div>
   )
 }
