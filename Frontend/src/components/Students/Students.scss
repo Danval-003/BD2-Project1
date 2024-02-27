@@ -2,10 +2,10 @@
 @import './../../Colors.scss';
 
 .mainTableContainer{
+    height: 100%;
     width: 90%;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
 .tableview {
@@ -14,12 +14,12 @@
     font-size: small;
     border: 1px solid #c5c5c5;
     border-collapse: collapse;
-    overflow-x: hidden;
 }
 
 .tableHeaders {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     color: #979dac;
     font-weight: 600;
     border-bottom: 1px solid #c5c5c5;
@@ -35,7 +35,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100%; 
+    width: 100%;
+    align-items: center;
 }
 
 .th,

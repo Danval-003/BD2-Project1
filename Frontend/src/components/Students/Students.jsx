@@ -4,22 +4,12 @@ import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } fro
 import columns from './columns.jsx'
 import TableFilters from '../TableFilters'
 import useAPI from '../../hooks/useAPI'
-import { Input, Button, ButtonGroup, Text} from '@chakra-ui/react'
+import { Spinner, Button, ButtonGroup, Text } from '@chakra-ui/react'
 
 function Students() {
   const { fetchAPI, error, loading, result } = useAPI();
   const [data, setData] = useState();
-  const [columnFilters, setColumnFilters] = useState([]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    state:{
-      columnFilters,
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
-  });
+  const [searchParam, setSearchParam] = useState('');
 
   useEffect(() => {
     if (error) {
@@ -32,7 +22,6 @@ function Students() {
   }, [result])
 
   const displayData = async (searchParam, collectionName) => {
-    console.log(collectionName)
     await fetchAPI({
       method: "GET",
       route: `read/${collectionName}`,
@@ -43,14 +32,28 @@ function Students() {
   };
 
   useEffect(() => {
-    displayData(null,'students');
-    if (result) setData(result)
-  }, []);
-
+    console.log(searchParam);
+    if (searchParam.length === 0) {
+      displayData(null, 'students');
+    } else {
+      displayData(searchParam, 'students');
+    }
+  }, [searchParam]);
+  
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
+  });
 
   return (
     <div className="mainTableContainer">
-      <div><TableFilters/></div>
+      <div><TableFilters 
+              searchParam = {searchParam} 
+              setSearchParam = {setSearchParam} 
+              />
+      </div>
       <div className="tableview" w={table.getTotalSize()}>
         <div className="tableHeaders">
           {table.getHeaderGroups().map(headerGroup => (
@@ -84,28 +87,32 @@ function Students() {
           </div>
         )}
       </div>
-      <Text>
-        Page {table.getState().pagination.pageIndex + 1} of {""}
-        {table.getPageCount()}
-      </Text>
-      <ButtonGroup>
-        <Button
-        onClick = {
-          () => table.previousPage()
-        }
-        isDisabled ={
-          !table.getCanPreviousPage()
-        }
-        >{'<'}</Button>
-        <Button
-        onClick = {
-          () => table.nextPage()
-        }
-        isDisabled ={
-          !table.getCanNextPage()
-        }
-        >{'>'}</Button>
-      </ButtonGroup>
+      <div>
+        {data && (
+          <React.Fragment>
+            <Text fontSize='90%'>
+              Page {table.getState().pagination.pageIndex + 1} of {""}
+              {table.getPageCount()}
+            </Text>
+            <ButtonGroup>
+              <Button
+                size='100px'
+                onClick={() => table.previousPage()}
+                isDisabled={!table.getCanPreviousPage()}
+              >
+                {'<'}
+              </Button>
+              <Button
+                size='sm'
+                onClick={() => table.nextPage()}
+                isDisabled={!table.getCanNextPage()}
+              >
+                {'>'}
+              </Button>
+            </ButtonGroup>
+          </React.Fragment>
+        )}
+      </div>
     </div>
   )
 }

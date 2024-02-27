@@ -9,6 +9,7 @@ const Queries = () => {
         <div className="tableContainer">
             <Students />
         </div>
+        <h2>Teacher Query</h2>
     </div>
   )
 }
