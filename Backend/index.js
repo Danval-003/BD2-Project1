@@ -9,6 +9,7 @@ import read from "./routes/read/index.js";
 import create from "./routes/create/index.js";
 import premade from "./routes/premades/index.js";
 import del from "./routes/delete/index.js";
+import update from "./routes/update/index.js";
 import { PORT, URI } from "./config.js";
 
 const app = express();
@@ -18,9 +19,10 @@ app.use(express.json());
 app.use("/read/", read);
 app.use("/create/", create);
 app.use("/delete", del);
+app.use("/update/", update);
 app.use("/premade/", premade);
 
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(URI)
   .then(() => {
     console.log("Connected to DB");
     const connection = mongoose.connection;
@@ -30,7 +32,7 @@ mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
       url: URI,
       file: (req, file) => {
         return {
-          filename: file.originalname,
+          filename: req.body.fileName ? req.body.fileName : file.originalname,
           bucketName: "uploads"
         };
       }

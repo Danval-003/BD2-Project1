@@ -25,7 +25,7 @@ const Rankings = () => {
   useEffect(() => {
     if (count === 0) {
       SetCount(1)
-    } else if (count === 1) {
+    } else if (count === 1 && response.length > 0) {
       const rankList = response.map((student) => ({
         name: student._id.student,
         score: student.mean.toFixed(2),
@@ -43,7 +43,7 @@ const Rankings = () => {
         return [...newCards, newCard]
       })
       SetCount(2)
-    } else if (count === 2) {
+    } else if (count === 2 && response.length > 0) {
       const rankList = response.map((teacher) => ({
         name: teacher._id.teacher,
         score: teacher.mean.toFixed(2),
@@ -61,7 +61,7 @@ const Rankings = () => {
         return [newCard, ...newCards]
       })
       SetCount(3)
-    } else if (count === 3) {
+    } else if (count === 3 && response.length > 0) {
       const rankList = response.map((course) => ({
         name: `${course._id.Courses}-${course._id.grade}`,
         score: course.mean.toFixed(2),
@@ -79,6 +79,8 @@ const Rankings = () => {
         return [newCard, ...newCards]
       })
       setLoading(false)
+    } else if (count <= 3) {
+      SetCount(count + 1)
     }
   }, [response])
 
@@ -86,15 +88,18 @@ const Rankings = () => {
 
   useEffect(() => {
     if (carrouselKey === 3) {
-      setCarrousel(
-        <Carrousel key={carrouselKey} cards={newCards} offset={2} />,
-      )
+      if (newCards.length > 0) {
+        setCarrousel(
+          <Carrousel key={carrouselKey} cards={newCards} offset={2} />,
+        )
+      }
     }
     setCarrouselKey(carrouselKey + 1)
   }, [newCards])
 
   useEffect(() => {
     console.log(newCards)
+    console.log('tamano', newCards.length)
   }, [carrouselKey])
 
   return (

@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/bestStudents', async (req, res) => {
     try {
-        let col = getCollection('student')
+        let col = getCollection('students')
         const result = await col.aggregate([
             { $unwind: "$courses" },
             { $match: {"courses.year": 2023} },
@@ -22,7 +22,7 @@ router.get('/bestStudents', async (req, res) => {
 
 router.get('/bestTeachers', async (req, res) => {
     try {
-        let col = getCollection('teacher')
+        let col = getCollection('teachers')
         const result = await col.aggregate([
             { $unwind: "$courses" },
             { $match: {"courses.year": 2023} },
@@ -39,7 +39,7 @@ router.get('/bestTeachers', async (req, res) => {
 
 router.get('/bestGrades', async (req, res) => {
     try {
-        let col = getCollection('teacher')
+        let col = getCollection('teachers')
         const result = await col.aggregate([
             { $unwind: "$courses" },
             { $group: {_id: {Courses: "$courses.name", grade: "$courses.idGrade"}, mean: {$avg: "$courses.performance"}} },
@@ -55,7 +55,7 @@ router.get('/bestGrades', async (req, res) => {
 
 router.get('/bestStudents/limit', async (req, res) => {
     try {
-        let col = getCollection('student');
+        let col = getCollection('students');
         const result = await col.aggregate([
             { $unwind: "$courses" },
             { $match: {"courses.year": 2023} },

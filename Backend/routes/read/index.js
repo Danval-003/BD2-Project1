@@ -3,7 +3,7 @@ import { getCollection } from '../../utils/collections.js'
 
 const router = express.Router()
 
-router.get('/:collection', async (req, res) => {
+router.post('/:collection', async (req, res) => {
     let baseLimit = 30
     let interval = req.query.page ? req.query.page : 0
     try {
@@ -30,9 +30,8 @@ router.get('/search/:collection', async (req, res) => {
                     }
                 }
             },
-            { $limit: 300 }
+            { $limit: 100 }
         ]);
-        console.log(result.length);
         res.json(result);
     } catch (err) {
         console.error(err);
@@ -40,4 +39,19 @@ router.get('/search/:collection', async (req, res) => {
     }
 })
 
+router.get('/coursesByGrade', async (req, res) => {
+    try {
+        let queryGrade = req.query.grade
+        let col = getCollection('STUDENTS')
+        const result = await col.aggregate([
+            { $unwind: "$courses" },
+            { $match: {"courses.idGrade": req.query.grade, "idGrade": req.query.grade} },
+            { $group: {_id: {idCourse: "$courses.idCourse"}} },
+        ]);
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+})
 export default router
