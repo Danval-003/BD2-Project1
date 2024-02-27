@@ -69,6 +69,6 @@ router.get('/bestStudents/limit', async (req, res) => {
         console.error(err);
         res.status(500).json(err);
     }
-})
+});
 
 export default router

@@ -4,7 +4,7 @@ import { getCollection } from '../../utils/collections.js'
 const router = express.Router()
 
 router.post('/:collection', async (req, res) => {
-    let baseLimit = 30
+    let baseLimit = 100
     let interval = req.query.page ? req.query.page : 0
     try {
         let col = getCollection(req.params.collection)
@@ -45,8 +45,10 @@ router.get('/coursesByGrade', async (req, res) => {
         let col = getCollection('STUDENTS')
         const result = await col.aggregate([
             { $unwind: "$courses" },
-            { $match: {"courses.idGrade": req.query.grade, "idGrade": req.query.grade} },
-            { $group: {_id: {idCourse: "$courses.idCourse"}} },
+            { $match: {"courses.idGrade": queryGrade, "idGrade": queryGrade} },
+            { $group: {_id: "$courses.idCourse"} },
+            { $project: {idCourse: "$_id"} },
+            { $project: {_id: 0}},
         ]);
         res.json(result);
     } catch (err) {
