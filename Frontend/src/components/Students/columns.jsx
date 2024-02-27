@@ -83,7 +83,7 @@ import {
 
   const columnsDict = {
     gender: ['Gender','text' ],
-    fullName: ['Full Name','text'],
+    fullName: ['Name','text'],
     age: ['Age','number']
   };
 

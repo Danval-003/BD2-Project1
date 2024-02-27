@@ -1,14 +1,17 @@
-
-.mainContainer {
+.mainContainerTableForm {
     width: 100%;
     height: 100%;
-    background-color: red;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 .tableform {
+    width: 100%;
     display: flex;
     flex-direction: row;
     font-size: medium;
+}
+
+.mainContainerTableForm > :not(:first-child) {
+    align-self: center;
 }

@@ -20,11 +20,12 @@ function Students() {
 
   useEffect(() => {
     if (result) setData(result);
+    console.log(data)
   }, [result])
 
   const displayData = async (searchParam, collectionName) => {
     await fetchAPI({
-      method: "GET",
+      method: "POST",
       route: `read/${collectionName}`,
       body: searchParam,
       log: false,
@@ -42,7 +43,7 @@ function Students() {
   }, [searchParam]);
 
   const handleEdit = (idElement) => {
-    console.log(columnsDict)
+    console.log(data)
     console.log('Editing element with ID:', idElement);
   };
 
