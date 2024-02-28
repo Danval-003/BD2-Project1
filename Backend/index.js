@@ -13,7 +13,9 @@ import update from "./routes/update/index.js";
 import { PORT, URI } from "./config.js";
 
 const app = express();
+
 app.use(cors());
+
 app.use(express.json());
 
 app.use("/read/", read);

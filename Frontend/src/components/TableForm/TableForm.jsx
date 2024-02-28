@@ -1,29 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './TableForm.scss';
 import { Input, InputGroup, Select, Checkbox, Button } from '@chakra-ui/react';
-import { useAPI } from '../../hooks/useAPI';
+import { useGetCourses } from '../../hooks/api/useGetCourses';
+import { useInsertDocument } from '../../hooks/api/useInsert';
 
 const TableForm = ({ columns }) => {
-  const { fetchAPI, error, loading, result } = useAPI();
-  const [courses, setCourses]  = useState([])
-
-  function randomSection(length) {
-    let result = '';
-    const characters = 'ABC';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
-    }
-    return result;
-  }
-
   const [student, setStudent] = useState({
     fullName: '',
     idSchool: '',
     grade: '',
-    age: undefined,
+    age: '',
     gender: '',
     eca: false,
     courses:[],
@@ -31,55 +17,7 @@ const TableForm = ({ columns }) => {
     gradeSection: ''
   });
 
-  useEffect(() => {
-    if (error) {
-      console.error(`Error fetching data: `, error.status, error.message);
-    }
-  }, [error]);
-
-  const getCourses = async (idGrade) => {
-    await fetchAPI({
-      method: "GET",
-      route: `read/coursesByGrade?grade=${idGrade}`,
-      body: null,
-      log: false,
-      showReply: false,
-    });
-  };
-
-  const insertStudent = async (student) => {
-    await fetchAPI({
-      method: "POST",
-      route: `create/students`,
-      body: student,
-      log: false,
-      showReply: false,
-    });
-  };
-
-  useEffect(() => {
-    if (student.grade != '') {
-      getCourses(student.grade);
-    }
-  }, [student.grade]);
-
-  useEffect(() => {
-    if (result) setCourses(result);
-  }, [result])
-
-
-  const handleInputChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
-    setStudent({ ...student, [name]: newValue });
-  };
-
-  const handleSubmit = () => {
-    student.gradeSection = randomSection(1)
-    student.courses = courses
-    console.log(student)
-  };
-
+  
   const gradeOptions = [
     "PRI01", "PRI02", "PRI03", "PRI04", "PRI05", "PRI06", "PRI07", "PRI08",
     "SEC01", "SEC02", "SEC03", "SEC04"
@@ -111,6 +49,74 @@ const TableForm = ({ columns }) => {
       }
     }
   ];
+
+  function randomSection(length) {
+    let result = '';
+    const characters = 'ABC';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  }
+
+  function addCourseFields(courses, student) {
+    return courses.map(course => ({
+      ...course,
+      idGrade: student.grade,
+      year: 2024,
+      section: student.gradeSection,
+      percentGrade: null
+    }));
+  }
+
+  const {
+    getCourses,
+    data,
+    errorGetCourses,
+    loadingGetCourses,
+  } = useGetCourses();
+
+  const {
+    insertDocument,
+    resultInsert,
+    errorInsert,
+    loadingInsert,
+  } = useInsertDocument();
+
+
+  useEffect(() => {
+    if (student.grade != '') {
+      getCourses(student.grade);
+    }
+  }, [student.grade]);
+
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
+    setStudent({ ...student, [name]: newValue });
+  };
+
+  const handleSubmit = () => {
+    student.gradeSection = randomSection(1)
+    const updatedCourses = addCourseFields(data, student);
+    student.courses = updatedCourses
+    insertDocument(student,'students')
+    setStudent({
+      fullName: '',
+      idSchool: '',
+      grade: '',
+      age: '',
+      gender: '',
+      eca: false,
+      courses:[],
+      admissionYear: 2024,
+      gradeSection: ''
+    });
+
+  };
 
   if (!columns) {
     return null;

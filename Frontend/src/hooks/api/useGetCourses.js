@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useAPI } from "../useAPI";
+import { useAPI } from '../../hooks/useAPI';
 
-function useDisplayData() {
+function useGetCourses () {
   const { fetchAPI, error, loading, result } = useAPI();
   const [data, setData] = useState();
 
@@ -15,10 +15,10 @@ function useDisplayData() {
     if (result) setData(result);
   }, [result])
 
-  const displayDataSet = async (collectionName) => {
+  const getCourses = async (idGrade) => {
     await fetchAPI({
-      method: "POST",
-      route: `read/${collectionName}`,
+      method: "GET",
+      route: `read/coursesByGrade?grade=${idGrade}`,
       body: null,
       log: false,
       showReply: false,
@@ -27,10 +27,10 @@ function useDisplayData() {
 
   return {
     data,
-    errorDisplay: error,
-    loadingDisplay: loading,
-    displayDataSet
+    errorGetCourses: error,
+    loadingGetCourses: loading,
+    getCourses
   };
 }
 
-export { useDisplayData };
+export { useGetCourses };
