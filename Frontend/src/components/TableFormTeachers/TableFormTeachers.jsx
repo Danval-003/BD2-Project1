@@ -104,7 +104,7 @@ const TableFormTeachers = ({ columns }) => {
           </Select>
         </InputGroup>
       </div>
-      <Button maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
+      <Button style={{alignSelf:'center'}} maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
         Add Teacher
       </Button>
     </div>

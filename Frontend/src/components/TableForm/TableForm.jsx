@@ -178,7 +178,7 @@ const TableForm = ({ columns }) => {
           ECA
         </Checkbox>
       </div>
-      <Button maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
+      <Button style={{alignSelf:'center'}} maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
         Add Student
       </Button>
       <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Bulk Write</h2>

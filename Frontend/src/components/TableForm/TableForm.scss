@@ -20,10 +20,6 @@
     }
   }
   
-  .mainContainerTableForm > :not(:first-child) {
-    align-self: center;
-  }
-  
   label {
     margin-right: 10px;
   }
@@ -32,4 +28,3 @@
   select {
     width: 100%;
   }
-  
