@@ -71,4 +71,4 @@ function useAPI() {
   }
 }
 
-export default useAPI
+export { useAPI }

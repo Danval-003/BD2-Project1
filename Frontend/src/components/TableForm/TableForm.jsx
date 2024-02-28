@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TableForm.scss';
 import { Input, InputGroup, Select, Checkbox, Button } from '@chakra-ui/react';
-import useAPI from '../../hooks/useAPI'
+import { useAPI } from '../../hooks/useAPI';
 
 const TableForm = ({ columns }) => {
   const { fetchAPI, error, loading, result } = useAPI();

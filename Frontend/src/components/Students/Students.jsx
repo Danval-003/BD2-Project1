@@ -3,52 +3,44 @@ import './Students.scss'
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table'
 import {columns, columnsDict} from './columns.jsx'
 import TableFilters from '../TableFilters'
-import useAPI from '../../hooks/useAPI'
 import {Button, ButtonGroup, Text } from '@chakra-ui/react'
 import TableForm from '../TableForm/TableForm'
+import { useDeleteDocument } from "../../hooks/api/useDelete"
+import { useDisplayData } from '../../hooks/api/useDisplayData'
 
 function Students() {
-  const { fetchAPI, error, loading, result } = useAPI();
-  const [data, setData] = useState();
   const [searchParam, setSearchParam] = useState('');
 
-  useEffect(() => {
-    if (error) {
-      console.error(`Error fetching data: `, error.status, error.message);
-    }
-  }, [error]);
+  const {
+    deleteDocument,
+    resultDeleting,
+    errorDeleting,
+    loadingDeleteDocument,
+  } = useDeleteDocument();
+
+  const {
+    displayDataSet,
+    data,
+    errorDisplay,
+    loadingDisplay,
+  } = useDisplayData();
 
   useEffect(() => {
-    if (result) setData(result);
-    console.log(data)
-  }, [result])
-
-  const displayData = async (searchParam, collectionName) => {
-    await fetchAPI({
-      method: "POST",
-      route: `read/${collectionName}`,
-      body: searchParam,
-      log: false,
-      showReply: false,
-    });
-  };
-
-  useEffect(() => {
-    console.log(searchParam);
-    if (searchParam.length === 0) {
-      displayData(null, 'students');
-    } else {
-      displayData(searchParam, 'students');
-    }
-  }, [searchParam]);
+    displayDataSet('students')
+  }, []);
 
   const handleEdit = (idElement) => {
-    console.log(data)
+    console.log(resultDisplay)
     console.log('Editing element with ID:', idElement);
   };
 
-  const handleDelete = (idElement) => {
-    console.log('Deleting element with ID:', idElement);
+  const handleDelete = async (idElement) => {
+    try {
+      await deleteDocument(idElement, 'students');
+      displayDataSet('students');
+    } catch (error) {
+      console.error('Error deleting element:', error);
+    }
   };
     
   const table = useReactTable({
