@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Queries.scss'
-import { Students } from '@components'
+import { Students, Teachers } from '@components'
 
 const Queries = () => {
   return (
@@ -10,6 +10,9 @@ const Queries = () => {
             <Students />
         </div>
         <h2>Teacher Query</h2>
+        <div className="tableContainer">
+            <Teachers />
+        </div>
     </div>
   )
 }
