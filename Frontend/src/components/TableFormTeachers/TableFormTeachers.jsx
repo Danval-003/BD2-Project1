@@ -73,7 +73,7 @@ const TableFormTeachers = ({ columns }) => {
 
   return (
     <div className='mainContainerTableForm'>
-      <h2>Insert Data</h2>
+      <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Insert Data</h2>
       <div className="tableform">
         {Object.keys(columns).map(columnKey => (
           <InputGroup key={columnKey}>
@@ -92,7 +92,7 @@ const TableFormTeachers = ({ columns }) => {
         <InputGroup>
           <label style={{ marginRight: '20px' }}>School</label>
           <Select
-            style={{ fontFamily: 'inherit' }}
+            style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select School'
             value={teacher.idSchool}
             name="idSchool"

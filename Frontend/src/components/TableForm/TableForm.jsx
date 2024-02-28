@@ -126,7 +126,7 @@ const TableForm = ({ columns }) => {
 
   return (
     <div className='mainContainerTableForm'>
-      <h2>Insert Data</h2>
+      <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Insert Data</h2>
       <div className="tableform">
         {Object.keys(columns).map(columnKey => (
           <InputGroup key={columnKey}>
@@ -145,7 +145,7 @@ const TableForm = ({ columns }) => {
         <InputGroup>
           <label style={{ marginRight: '20px' }}>School</label>
           <Select
-            style={{ fontFamily: 'inherit' }}
+            style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select School'
             value={student.idSchool}
             name="idSchool"
@@ -159,7 +159,7 @@ const TableForm = ({ columns }) => {
         <InputGroup>
           <label style={{ marginRight: '20px' }}>Grade</label>
           <Select
-            style={{ fontFamily: 'inherit' }}
+            style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select Grade'
             value={student.grade}
             name="grade"
@@ -181,6 +181,7 @@ const TableForm = ({ columns }) => {
       <Button maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
         Add Student
       </Button>
+      <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Bulk Write</h2>
     </div>
   );
 };
