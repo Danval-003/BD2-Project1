@@ -10,7 +10,6 @@ import { useDisplayData } from '../../hooks/api/useDisplayData'
 import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 
 function Students() {
-  const [searchParam, setSearchParam] = useState('');
   const [data, setData] = useState()
   
   const {
@@ -34,17 +33,21 @@ function Students() {
     loadingGlobSearch,
   } = useGlobalSearch();
 
-  useEffect(() => {
-    if (searchParam.length != 0) {
-      console.log(searchParam)
-      globalSearch(searchParam,'students')
-      setData(dataSearch)
+  const getFilteredData = (query) => {
+    if (query.length != 0) {
+      globalSearch(query,'students')
     } else {
-      console.log(searchParam)
       setData(displayData)
     }
-  }, [searchParam]);
+  };
 
+  useEffect(() => {
+    setData(dataSearch)
+  }, [dataSearch]);
+
+  useEffect(() => {
+    setData(displayData)
+  }, [displayData]);
 
   useEffect(() => {
     displayDataSet('students')
@@ -73,8 +76,7 @@ function Students() {
   return (
     <div className="mainTableContainer">
       <div><TableFilters 
-              searchParam = {searchParam} 
-              setSearchParam = {setSearchParam} 
+              callback = {getFilteredData} 
               />
       </div>
       <div className="tableview" w={table.getTotalSize()}>

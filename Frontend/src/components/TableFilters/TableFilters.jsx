@@ -3,10 +3,10 @@ import './TableFilters.scss'
 import { Input, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 
-const TableFilters = ({ searchParam, setSearchParam }) => {
+const TableFilters = ({ callback }) => {
 
   const handleInputChange = (event) => {
-    setSearchParam(event.target.value);
+    callback(event.target.value);
   };
 
   return (
@@ -19,7 +19,6 @@ const TableFilters = ({ searchParam, setSearchParam }) => {
           borderRadius={5}
           type="text"
           style={{ color: "#979dac", height: '2rem', background: '#979dac2a', border: 'none', padding: "0px 10px" }}
-          value={searchParam}
           onChange={handleInputChange}
         />
       </InputGroup>
