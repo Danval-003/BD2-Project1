@@ -7,10 +7,12 @@ import {Button, ButtonGroup, Text } from '@chakra-ui/react'
 import TableForm from '../TableForm/TableForm'
 import { useDeleteDocument } from "../../hooks/api/useDelete"
 import { useDisplayData } from '../../hooks/api/useDisplayData'
+import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 
 function Students() {
   const [searchParam, setSearchParam] = useState('');
-
+  const [data, setData] = useState()
+  
   const {
     deleteDocument,
     resultDeleting,
@@ -20,17 +22,35 @@ function Students() {
 
   const {
     displayDataSet,
-    data,
+    displayData,
     errorDisplay,
     loadingDisplay,
   } = useDisplayData();
+
+  const {
+    globalSearch,
+    dataSearch,
+    errorGlobSearch,
+    loadingGlobSearch,
+  } = useGlobalSearch();
+
+  useEffect(() => {
+    if (searchParam.length != 0) {
+      console.log(searchParam)
+      globalSearch(searchParam,'students')
+      setData(dataSearch)
+    } else {
+      console.log(searchParam)
+      setData(displayData)
+    }
+  }, [searchParam]);
+
 
   useEffect(() => {
     displayDataSet('students')
   }, []);
 
   const handleEdit = (idElement) => {
-    console.log(resultDisplay)
     console.log('Editing element with ID:', idElement);
   };
 

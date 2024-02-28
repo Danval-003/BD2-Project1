@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAPI } from "../useAPI";
 
-function useDisplayData() {
+function useGlobalSearch() {
   const { fetchAPI, error, loading, result } = useAPI();
-  const [displayData, setData] = useState();
+  const [dataSearch, setData] = useState();
 
   useEffect(() => {
     if (error) {
@@ -15,10 +15,10 @@ function useDisplayData() {
     if (result) setData(result);
   }, [result])
 
-  const displayDataSet = async (collectionName) => {
+  const globalSearch = async (param, collectionName) => {
     await fetchAPI({
-      method: "POST",
-      route: `read/${collectionName}`,
+      method: "GET",
+      route: `read/search/${collectionName}?q=${param}`,
       body: null,
       log: false,
       showReply: false,
@@ -26,11 +26,11 @@ function useDisplayData() {
   };
 
   return {
-    displayData,
-    errorDisplay: error,
-    loadingDisplay: loading,
-    displayDataSet
+    dataSearch,
+    errorGlobSearch: error,
+    loadingGlobSearch: loading,
+    globalSearch
   };
 }
 
-export { useDisplayData };
+export { useGlobalSearch };
