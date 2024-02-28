@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react'
 import './Rankings.scss'
-import { Ranking, Carrousel } from '@components'
+import { Ranking, Carrousel, ImageRanking } from '@components'
 import { LoadTemplate } from '@assets'
 import useApi2 from '../../hooks/useApi2'
 
@@ -102,17 +103,24 @@ const Rankings = () => {
     console.log('tamano', newCards.length)
   }, [carrouselKey])
 
+  const content = (
+    <div className='content-container'>
+      <div className="carrousel-container">
+        {carrousel}
+      </div>
+      <div className='image-ranking-container'>
+        <ImageRanking />
+      </div>
+    </div>
+  )
+
   return (
     <div className={`rankings ${loading ? 'loading' : ''}`}>
       {loading ? (
         <div className="load">
           <img src={LoadTemplate} alt="Loading" />
         </div>
-      ) : (
-        <div className="carrousel-container">
-          {carrousel}
-        </div>
-      )}
+      ) : content}
     </div>
 
   )

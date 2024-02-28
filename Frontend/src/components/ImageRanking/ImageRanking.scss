@@ -1,0 +1,113 @@
+@import "../../Colors.scss";
+
+.imageranking{
+    width: 100%;
+    height: 58%;
+    border-radius: 0.5vw;
+    background-color: white;
+    border-right: 0;
+    box-shadow: 0px 0px 0.5vw rgba($black, 0.1);
+    &:hover{
+        box-shadow: 0px 0px 0.5vw rgba($black, 0.3);
+        height: 65%;
+        & .student-image{
+            transform: scale(1.05);
+        }
+    }
+
+    transition: all 0.3s ease-in-out;
+
+    & h1{
+        height: 20%;
+        color: $white;
+        font-size: 2.0vw;
+        background-color: $main-color;
+        padding: 0.1vw;
+        padding-bottom: 0.5vw;
+        padding-left: 1vw;
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 3vw;
+        border-top-left-radius: 0.5vw;
+        border-top-right-radius: 0.5vw;
+    }
+
+    & .student-image{
+        margin-top: 2vh;
+        border-radius: 1vw;
+        box-shadow: 0 0 1vw rgba($black, 0.2);
+        transition: inherit;
+        margin-left: 2vw;
+    }
+
+    & .__content{
+        height: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    & .text__content{
+        width: 70%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        & h2{
+            font-size: 1.7vw;
+            color: $main-color;
+            margin: 0;
+        }
+        & p{
+            font-size: 1.3vw;
+            color: $black;
+            margin: 0;
+            width: fit-content;
+        }
+    }
+
+    & .info-cont{
+        display: grid;
+        grid-template-columns: 5fr 3fr;
+    }
+
+    & .buttons-cont{
+        margin-left: 2vw;
+        display: flex;
+        justify-content: center;
+        gap: 2vw;
+        & button{
+            height: 4.5vh;
+            border: $main-color solid;
+            background-color: white;
+            color: $main-color;
+            line-height: 0;
+            border-radius: 20%;
+            &:hover{
+                border: none;
+                background-color: $main-color;
+                color: white;
+                transform: scale(1.05);
+                filter: drop-shadow(0px 0px 5px rgba($main-color, 0.5));
+            }
+
+            transition: all 0.3s ease-in;
+
+            &:active{
+                border: $main-color solid;
+            }
+
+            &:focus{
+                outline: none;
+                border: $main-color solid;
+            }
+
+            &:first-child{
+
+            }
+            &:last-child{
+            }
+        }
+    }
+}

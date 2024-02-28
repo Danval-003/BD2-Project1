@@ -1,8 +1,10 @@
-import React from 'react'
+/* eslint-disable import/no-unresolved */
+import React, { useState } from 'react'
 import './Chars.scss'
 import { CharContainer } from '@components'
 
 const Chars = () => {
+  const [actualChar, setActualChar] = useState(0)
   const charList = [
     <iframe
       width="100%"
@@ -48,18 +50,29 @@ const Chars = () => {
     />,
   ]
 
+  const nextChar = () => {
+    if (actualChar === charList.length - 1) {
+      setActualChar(0)
+    } else {
+      setActualChar(actualChar + 1)
+    }
+  }
+
+  const prevChar = () => {
+    if (actualChar === 0) {
+      setActualChar(charList.length - 1)
+    } else {
+      setActualChar(actualChar - 1)
+    }
+  }
+
   return (
     <div className="chars-cont">
-      <div className="chars">
-        <CharContainer content={charList[0]} isBigger />
-        <CharContainer content={charList[1]} />
-        <CharContainer content={charList[2]} />
+      <div className="carrousel-char">
+        <CharContainer content={charList[actualChar]} />
       </div>
-      <div className="chars">
-        <CharContainer content={charList[4]} />
-        <CharContainer content={charList[5]} />
-        <CharContainer content={charList[3]} isBigger />
-      </div>
+      <button className="next" type="button" onClick={nextChar}> Next</button>
+      <button className="prev" type="button" onClick={prevChar}> Previous</button>
     </div>
   )
 }

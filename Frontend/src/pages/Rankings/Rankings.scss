@@ -6,17 +6,36 @@
     align-items: center;
 }
 
+.content-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    align-items: center;
+
+    & .image-ranking-container{
+        width: 42%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
 .carrousel-container{
-    width: 40%;
+    width: 45%;
     height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 5%;
-    margin-top: -2%;
     opacity: 1; /* Establece la opacidad predeterminada */
-    transition: opacity 0.5s ease; /* Agrega una transición de opacidad */
-
+    transition: all 0.7s ease; /* Agrega una transición de opacidad */
+    &:hover{
+        transform: scale(1.02);
+    }
 }
 
 .rank {
