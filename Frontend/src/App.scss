@@ -54,14 +54,28 @@
   top: 0;
   left: 0;
   font-family: inherit;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .content{
   width: 100%;
-  min-height: 88%;
-  height: auto;
+  height: 88%;
   display: block;
   position: absolute;
   top: 12%;
   left: 0;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0.7vw; /* Ancho de la barra de scroll */
+  }
+
+  &::-webkit-scrollbar-thumb {
+  background-color: rgba($black, 0.1); /* Color del fondo de la barra de scroll */
+  border-radius: 0.9vw; /* Bordes redondeados */
+  &:hover{
+      background-color: rgba($black, 0.3);
+  }
+
+  }
 }
