@@ -13,8 +13,13 @@
     background-color: $white;
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     overflow-x: hidden;
     
+=======
+    padding-bottom: 20px;
+
+>>>>>>> 65c3b32cbf32b1b321be7f342c0098f40e4d44fa
     & h2 {
         font-size: 150%;
         color: $main-color;
