@@ -9,7 +9,7 @@ import { useDeleteDocument } from "../../hooks/api/useDelete"
 import { useDisplayData } from '../../hooks/api/useDisplayData'
 import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 
-function Students() {
+function Students({setOpen}) {
   const [data, setData] = useState()
   
   const {
@@ -58,6 +58,7 @@ function Students() {
   };
 
   const handleViewCourses = (idElement) => {
+    setOpen(idElement)
     console.log('View Courses Of Element with ID:', idElement);
   };
 
@@ -146,5 +147,8 @@ function Students() {
     </div>
   )
 }
+
+
+
 
 export default Students

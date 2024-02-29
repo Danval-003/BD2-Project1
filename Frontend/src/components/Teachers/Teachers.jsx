@@ -9,7 +9,7 @@ import { useDisplayData } from '../../hooks/api/useDisplayData'
 import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 import TableFormTeachers from '../TableFormTeachers'
 
-function Teachers () {
+function Teachers ({setOpen}) {
   const [data, setData] = useState()
   
   const {
@@ -58,6 +58,7 @@ function Teachers () {
   };
 
   const handleViewCourses = (idElement) => {
+    setOpen(idElement)
     console.log('View Courses Of Element with ID:', idElement);
   };
 

@@ -6,7 +6,9 @@ import CharContainer from './CharContainer'
 import ImageRanking from './ImageRanking'
 import Teachers from './Teachers'
 import Modal from './Modal'
+import ModalStudent from './ModalStudent'
+import CustomSelect from './CustomSelect'
 
 export {
-  Menu, Ranking, Students, Carrousel, CharContainer, ImageRanking, Teachers, Modal
+  Menu, Ranking, Students, Carrousel, CharContainer, ImageRanking, CustomSelect, Teachers, Modal, ModalStudent,
 }
