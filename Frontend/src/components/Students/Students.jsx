@@ -57,6 +57,10 @@ function Students() {
     console.log('Editing element with ID:', idElement);
   };
 
+  const handleViewCourses = (idElement) => {
+    console.log('View Courses Of Element with ID:', idElement);
+  };
+
   const handleDelete = async (idElement) => {
     try {
       await deleteDocument(idElement, 'students');
@@ -68,7 +72,7 @@ function Students() {
     
   const table = useReactTable({
     data,
-    columns: columns(handleEdit, handleDelete),
+    columns: columns(handleEdit, handleDelete, handleViewCourses),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel()
   });
