@@ -9,7 +9,7 @@ const TableForm = ({ columns }) => {
   const [student, setStudent] = useState({
     fullName: '',
     idSchool: '',
-    grade: '',
+    idGrade: '',
     age: '',
     gender: '',
     eca: false,
@@ -88,10 +88,10 @@ const TableForm = ({ columns }) => {
 
 
   useEffect(() => {
-    if (student.grade != '') {
-      getCourses(student.grade);
+    if (student.idGrade != '') {
+      getCourses(student.idGrade);
     }
-  }, [student.grade]);
+  }, [student.idGrade]);
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -107,7 +107,7 @@ const TableForm = ({ columns }) => {
     setStudent({
       fullName: '',
       idSchool: '',
-      grade: '',
+      idGrade: '',
       age: '',
       gender: '',
       eca: false,
@@ -115,7 +115,6 @@ const TableForm = ({ columns }) => {
       admissionYear: 2024,
       gradeSection: ''
     });
-
   };
 
   if (!columns) {
@@ -143,7 +142,7 @@ const TableForm = ({ columns }) => {
           </InputGroup>
         ))}
         <InputGroup>
-          <label style={{ marginRight: '20px' }}>School</label>
+          <label style={{ marginRight: '20px'}}>School</label>
           <Select
             style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select School'
@@ -161,8 +160,8 @@ const TableForm = ({ columns }) => {
           <Select
             style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select Grade'
-            value={student.grade}
-            name="grade"
+            value={student.idGrade}
+            name="idGrade"
             onChange={handleInputChange}
           >
             {gradeOptions.map((option, index) => (
