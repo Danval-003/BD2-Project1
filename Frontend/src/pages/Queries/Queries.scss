@@ -1,5 +1,12 @@
 @import './../../Colors.scss';
 
+.mainCont{
+    height: 100%;
+    &.active{
+        overflow: hidden;
+    }
+}
+
 .mainContainer {
     width: 100%;
     height: fit-content;
