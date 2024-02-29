@@ -12,4 +12,3 @@ const schoolSchema = new mongoose.Schema({
 });
 
 export const School = mongoose.model('School', schoolSchema);
-
