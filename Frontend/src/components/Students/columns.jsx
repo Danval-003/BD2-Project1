@@ -6,9 +6,9 @@ import {
     IconButton
   } from '@chakra-ui/react';
 
-  import { GoKebabHorizontal, GoTrash, GoPencil } from "react-icons/go";
+  import { GoKebabHorizontal, GoTrash, GoPencil, GoMortarBoard } from "react-icons/go";
   
-  const columns = (handleEdit, handleDelete) => [
+  const columns = (handleEdit, handleDelete, handleViewCourses) => [
     {
       accessorKey: 'gender',
       header: 'Gender',
@@ -65,6 +65,10 @@ import {
               boxSize={25}
             />
             <MenuList bg={'white'} borderRadius="10px" border="1px solid #CBD5E0" zIndex='20'>
+              <MenuItem 
+                icon={<GoMortarBoard size={'18px'} />}
+                onClick={() => handleViewCourses(student._id)}> View Courses
+              </MenuItem>
               <MenuItem 
                 icon={<GoPencil size={'18px'} />}
                 onClick={() => handleEdit(student._id)}> Edit Element
