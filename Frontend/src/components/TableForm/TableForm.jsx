@@ -50,7 +50,7 @@ const TableForm = ({ columns }) => {
     }
   ];
 
-  function randomSection(length) {
+  const randomSection = (length) => {
     let result = '';
     const characters = 'ABC';
     const charactersLength = characters.length;
@@ -62,7 +62,7 @@ const TableForm = ({ columns }) => {
     return result;
   }
 
-  function addCourseFields(courses, student) {
+  const addCourseFields = (courses, student) => {
     return courses.map(course => ({
       ...course,
       idGrade: student.grade,
@@ -95,26 +95,35 @@ const TableForm = ({ columns }) => {
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
+    let newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
+    if (name === 'idSchool') {
+      schools.map((school) => {
+        if (value === school.idSchool) {
+          newValue = school;
+        }
+      })
+    }
+    console.log(name, newValue);
     setStudent({ ...student, [name]: newValue });
   };
 
   const handleSubmit = () => {
-    student.gradeSection = randomSection(1)
+    student.gradeSection = randomSection(1);
     const updatedCourses = addCourseFields(data, student);
-    student.courses = updatedCourses
+    student.courses = updatedCourses;
     insertDocument(student,'students')
     setStudent({
       fullName: '',
-      idSchool: '',
+      idSchool: {},
       idGrade: '',
       age: '',
       gender: '',
       eca: false,
-      courses:[],
+      courses: [],
       admissionYear: 2024,
       gradeSection: ''
     });
+
   };
 
   if (!columns) {
@@ -142,11 +151,11 @@ const TableForm = ({ columns }) => {
           </InputGroup>
         ))}
         <InputGroup>
-          <label style={{ marginRight: '20px'}}>School</label>
+          <label style={{ marginRight: '20px' }}>School</label>
           <Select
             style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select School'
-            value={student.idSchool}
+            value={student.idSchool.idSchool}
             name="idSchool"
             onChange={handleInputChange}
           >
