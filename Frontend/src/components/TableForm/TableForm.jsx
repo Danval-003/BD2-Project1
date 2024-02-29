@@ -3,6 +3,7 @@ import './TableForm.scss';
 import { Input, InputGroup, Select, Checkbox, Button } from '@chakra-ui/react';
 import { useGetCourses } from '../../hooks/api/useGetCourses';
 import { useInsertDocument } from '../../hooks/api/useInsert';
+import SingleFileUploader from '../SingleFileUploader';
 
 const TableForm = ({ columns }) => {
   const [student, setStudent] = useState({
@@ -17,7 +18,6 @@ const TableForm = ({ columns }) => {
     gradeSection: ''
   });
 
-  
   const gradeOptions = [
     "PRI01", "PRI02", "PRI03", "PRI04", "PRI05", "PRI06", "PRI07", "PRI08",
     "SEC01", "SEC02", "SEC03", "SEC04"
@@ -178,10 +178,20 @@ const TableForm = ({ columns }) => {
           ECA
         </Checkbox>
       </div>
-      <Button style={{alignSelf:'center'}} maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
+      <Button
+        fontWeight={'600'}
+        fontSize='14px'
+        style={{ alignSelf: 'center' }}
+        width={'15%'}
+        color="#FAFAFA"
+        bgColor='#95B8D1'
+        size='md'
+        marginTop='2%'
+        onClick={handleSubmit}
+      >
         Add Student
       </Button>
-      <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Bulk Write</h2>
+      <SingleFileUploader/>
     </div>
   );
 };
