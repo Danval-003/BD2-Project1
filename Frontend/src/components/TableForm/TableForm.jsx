@@ -3,12 +3,13 @@ import './TableForm.scss';
 import { Input, InputGroup, Select, Checkbox, Button } from '@chakra-ui/react';
 import { useGetCourses } from '../../hooks/api/useGetCourses';
 import { useInsertDocument } from '../../hooks/api/useInsert';
+import SingleFileUploader from '../SingleFileUploader';
 
 const TableForm = ({ columns }) => {
   const [student, setStudent] = useState({
     fullName: '',
     idSchool: '',
-    grade: '',
+    idGrade: '',
     age: '',
     gender: '',
     eca: false,
@@ -17,7 +18,6 @@ const TableForm = ({ columns }) => {
     gradeSection: ''
   });
 
-  
   const gradeOptions = [
     "PRI01", "PRI02", "PRI03", "PRI04", "PRI05", "PRI06", "PRI07", "PRI08",
     "SEC01", "SEC02", "SEC03", "SEC04"
@@ -50,7 +50,7 @@ const TableForm = ({ columns }) => {
     }
   ];
 
-  function randomSection(length) {
+  const randomSection = (length) => {
     let result = '';
     const characters = 'ABC';
     const charactersLength = characters.length;
@@ -62,7 +62,7 @@ const TableForm = ({ columns }) => {
     return result;
   }
 
-  function addCourseFields(courses, student) {
+  const addCourseFields = (courses, student) => {
     return courses.map(course => ({
       ...course,
       idGrade: student.grade,
@@ -72,46 +72,43 @@ const TableForm = ({ columns }) => {
     }));
   }
 
-  const {
-    getCourses,
-    data,
-    errorGetCourses,
-    loadingGetCourses,
-  } = useGetCourses();
-
-  const {
-    insertDocument,
-    resultInsert,
-    errorInsert,
-    loadingInsert,
-  } = useInsertDocument();
+  const { getCourses, data } = useGetCourses();
+  const { insertDocument } = useInsertDocument();
 
 
   useEffect(() => {
-    if (student.grade != '') {
-      getCourses(student.grade);
+    if (student.idGrade != '') {
+      getCourses(student.idGrade);
     }
-  }, [student.grade]);
+  }, [student.idGrade]);
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
+    let newValue = type === 'checkbox' ? checked : type === 'number' ? parseInt(value) : value;
+    if (name === 'idSchool') {
+      schools.map((school) => {
+        if (value === school.idSchool) {
+          newValue = school;
+        }
+      })
+    }
+    console.log(name, newValue);
     setStudent({ ...student, [name]: newValue });
   };
 
   const handleSubmit = () => {
-    student.gradeSection = randomSection(1)
+    student.gradeSection = randomSection(1);
     const updatedCourses = addCourseFields(data, student);
-    student.courses = updatedCourses
+    student.courses = updatedCourses;
     insertDocument(student,'students')
     setStudent({
       fullName: '',
-      idSchool: '',
-      grade: '',
+      idSchool: {},
+      idGrade: '',
       age: '',
       gender: '',
       eca: false,
-      courses:[],
+      courses: [],
       admissionYear: 2024,
       gradeSection: ''
     });
@@ -147,7 +144,7 @@ const TableForm = ({ columns }) => {
           <Select
             style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select School'
-            value={student.idSchool}
+            value={student.idSchool.idSchool}
             name="idSchool"
             onChange={handleInputChange}
           >
@@ -161,8 +158,8 @@ const TableForm = ({ columns }) => {
           <Select
             style={{fontFamily: 'inherit', padding:'3px 0px'}}
             placeholder='Select Grade'
-            value={student.grade}
-            name="grade"
+            value={student.idGrade}
+            name="idGrade"
             onChange={handleInputChange}
           >
             {gradeOptions.map((option, index) => (
@@ -178,10 +175,20 @@ const TableForm = ({ columns }) => {
           ECA
         </Checkbox>
       </div>
-      <Button style={{alignSelf:'center'}} maxW='20%' color="#FAFAFA" bgColor='#95B8D1' size='md' marginTop='2%' onClick={handleSubmit}>
+      <Button
+        fontWeight={'600'}
+        fontSize='14px'
+        style={{ alignSelf: 'center' }}
+        width={'15%'}
+        color="#FAFAFA"
+        bgColor='#95B8D1'
+        size='md'
+        marginTop='2%'
+        onClick={handleSubmit}
+      >
         Add Student
       </Button>
-      <h2 style={{marginLeft:'0px', fontSize:'120%'}}>Bulk Write</h2>
+      <SingleFileUploader/>
     </div>
   );
 };

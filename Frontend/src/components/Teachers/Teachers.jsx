@@ -3,15 +3,18 @@ import './Teachers.scss'
 import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table'
 import {columns, columnsDict} from './columns.jsx'
 import TableFilters from '../TableFilters'
-import {Button, ButtonGroup, Text } from '@chakra-ui/react'
+import {Button, ButtonGroup, Text, useDisclosure } from '@chakra-ui/react'
 import { useDeleteDocument } from "../../hooks/api/useDelete"
 import { useDisplayData } from '../../hooks/api/useDisplayData'
 import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 import TableFormTeachers from '../TableFormTeachers'
+import EditModal from '../EditModal';
 
 function Teachers ({setOpen}) {
   const [data, setData] = useState()
-  
+  const [element, setElement] = useState();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   const {
     deleteDocument,
     resultDeleting,
@@ -51,10 +54,16 @@ function Teachers ({setOpen}) {
 
   useEffect(() => {
     displayDataSet('teachers')
+  }, [isOpen]);
+
+  useEffect(() => {
+    displayDataSet('teachers')
   }, []);
 
   const handleEdit = (idElement) => {
-    console.log('Editing element with ID:', idElement);
+    onOpen();
+    setElement(idElement);
+    displayDataSet('teachers');
   };
 
   const handleViewCourses = (idElement) => {
@@ -144,6 +153,12 @@ function Teachers ({setOpen}) {
         )}
       </div>
       <TableFormTeachers columns={columnsDict}/>
+      {element && <EditModal
+        collectionName={'teachers'}
+        isStudent={false}
+        element={element}
+        isOpen={isOpen}
+        onClose={onClose} />}
     </div>
   )
 }

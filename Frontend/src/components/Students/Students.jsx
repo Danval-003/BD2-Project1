@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import './Students.scss'
-import { flexRender, getCoreRowModel, useReactTable, getPaginationRowModel } from '@tanstack/react-table'
-import {columns, columnsDict} from './columns.jsx'
-import TableFilters from '../TableFilters'
-import {Button, ButtonGroup, Text } from '@chakra-ui/react'
-import TableForm from '../TableForm/TableForm'
-import { useDeleteDocument } from "../../hooks/api/useDelete"
-import { useDisplayData } from '../../hooks/api/useDisplayData'
-import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
+import React, { useState, useEffect } from 'react';
+import './Students.scss';
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  getPaginationRowModel
+} from '@tanstack/react-table';
+import { columns, columnsDict } from './columns.jsx';
+import TableFilters from '../TableFilters';
+import { Button, ButtonGroup, Text, useDisclosure } from '@chakra-ui/react';
+import TableForm from '../TableForm/TableForm';
+import EditModal from '../EditModal';
+import { useDeleteDocument } from "../../hooks/api/useDelete";
+import { useDisplayData } from '../../hooks/api/useDisplayData';
+import { useGlobalSearch } from '../../hooks/api/useGlobalSearch';
 
-function Students({setOpen}) {
-  const [data, setData] = useState()
-  
+function Students() {
+  const [data, setData] = useState();
+  const [element, setElement] = useState();
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   const {
     deleteDocument,
     resultDeleting,
@@ -34,27 +42,33 @@ function Students({setOpen}) {
   } = useGlobalSearch();
 
   const getFilteredData = (query) => {
-    if (query.length != 0) {
-      globalSearch(query,'students')
+    if (query.length !== 0) {
+      globalSearch(query, 'students');
     } else {
-      setData(displayData)
+      setData(displayData);
     }
   };
 
   useEffect(() => {
-    setData(dataSearch)
+    setData(dataSearch);
   }, [dataSearch]);
 
   useEffect(() => {
-    setData(displayData)
+    setData(displayData);
   }, [displayData]);
 
   useEffect(() => {
     displayDataSet('students')
+  }, [isOpen]);
+
+  useEffect(() => {
+    displayDataSet('students');
   }, []);
 
   const handleEdit = (idElement) => {
-    console.log('Editing element with ID:', idElement);
+    onOpen();
+    setElement(idElement);
+    displayDataSet('students');
   };
 
   const handleViewCourses = (idElement) => {
@@ -70,7 +84,7 @@ function Students({setOpen}) {
       console.error('Error deleting element:', error);
     }
   };
-    
+
   const table = useReactTable({
     data,
     columns: columns(handleEdit, handleDelete, handleViewCourses),
@@ -80,9 +94,8 @@ function Students({setOpen}) {
 
   return (
     <div className="mainTableContainer">
-      <div><TableFilters 
-              callback = {getFilteredData} 
-              />
+      <div>
+        <TableFilters callback={getFilteredData} />
       </div>
       <div className="tableview" w={table.getTotalSize()}>
         <div className="tableHeaders">
@@ -143,12 +156,15 @@ function Students({setOpen}) {
           </React.Fragment>
         )}
       </div>
-      <TableForm columns={columnsDict}/>
+      <TableForm columns={columnsDict} />
+      {element && <EditModal
+        collectionName={'students'}
+        isStudent={true}
+        element={element}
+        isOpen={isOpen}
+        onClose={onClose} />}
     </div>
-  )
+  );
 }
 
-
-
-
-export default Students
+export default Students;
