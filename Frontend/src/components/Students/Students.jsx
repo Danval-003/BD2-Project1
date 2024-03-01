@@ -15,7 +15,7 @@ import { useDeleteDocument } from "../../hooks/api/useDelete";
 import { useDisplayData } from '../../hooks/api/useDisplayData';
 import { useGlobalSearch } from '../../hooks/api/useGlobalSearch';
 
-function Students() {
+function Students({ setOpen }) {
   const [data, setData] = useState();
   const [element, setElement] = useState();
   const { isOpen, onClose, onOpen } = useDisclosure();

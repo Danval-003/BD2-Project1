@@ -229,11 +229,13 @@
 }
 
 .closeModal {
+    display: flex;
     background-color: #ddd;
     color: #000;
-    font-weight: 500;
     align-self: flex-end;
     margin-right: 3.5%;
+    align-items: center;
+    text-align: center;
 }
 
 .addCourse{

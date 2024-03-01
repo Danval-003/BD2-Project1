@@ -112,6 +112,7 @@ const TableFormTeachers = ({ columns }) => {
               color="#FAFAFA"
               bgColor='#95B8D1'
               size='md'
+              marginBottom={"2%"}
               marginTop='2%' onClick={handleSubmit}>
         Add Teacher
       </Button>
