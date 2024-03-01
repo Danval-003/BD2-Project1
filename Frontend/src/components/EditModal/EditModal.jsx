@@ -76,11 +76,15 @@ function EditModal({collectionName, isStudent, element, isOpen, onClose }) {
           setGender(value);
           break;
         case 'school':
-          schools.map((school) => {
-            if (value === school.idSchool) {
-              setSchool(school);
-            }
-          })
+          if(isStudent){
+            schools.map((school) => {
+              if (value === school.idSchool) {
+                setSchool(school);
+              }
+            })
+          } else{
+            setSchool(value)
+          }
           break;
         default:
           break;
@@ -170,7 +174,7 @@ function EditModal({collectionName, isStudent, element, isOpen, onClose }) {
                   onChange={handleChange}
                   fontFamily='inherit'
                   fontSize='sm'
-                  placeholder='Full Name'
+                  placeholder='Full Name's
                   width='92%'
                   type='text'
                 />
@@ -184,7 +188,6 @@ function EditModal({collectionName, isStudent, element, isOpen, onClose }) {
                   value={age}
                   onChange={handleChange}
                   min='5'
-                  max='19'
                   fontFamily='inherit'
                   fontSize='sm'
                   placeholder='Age'
@@ -214,7 +217,7 @@ function EditModal({collectionName, isStudent, element, isOpen, onClose }) {
                 </FormLabel>
                 <Select
                   name="school"
-                  value={school.idSchool}
+                  value={isStudent?school.idSchool:school}
                   onChange={handleChange}
                   fontFamily='inherit'
                   fontSize='sm'
