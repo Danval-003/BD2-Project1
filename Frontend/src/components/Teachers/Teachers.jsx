@@ -10,7 +10,7 @@ import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 import TableFormTeachers from '../TableFormTeachers'
 import EditModal from '../EditModal';
 
-function Teachers () {
+function Teachers ({setOpen}) {
   const [data, setData] = useState()
   const [element, setElement] = useState();
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -67,6 +67,7 @@ function Teachers () {
   };
 
   const handleViewCourses = (idElement) => {
+    setOpen(idElement)
     console.log('View Courses Of Element with ID:', idElement);
   };
 

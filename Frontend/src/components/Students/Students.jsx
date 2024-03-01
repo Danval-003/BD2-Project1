@@ -72,6 +72,7 @@ function Students() {
   };
 
   const handleViewCourses = (idElement) => {
+    setOpen(idElement)
     console.log('View Courses Of Element with ID:', idElement);
   };
 
