@@ -1,17 +1,20 @@
 @import "../../Colors.scss";
 
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .modal{
     width: 100%;
     height: 100%;
     background-color: rgba($black, 0.4);
     position: absolute;
-    top: 0;
-    left: 0;
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(0.1vw);
     & .modalContent{
         width: 50%;
         height: 70%;
@@ -29,49 +32,45 @@
         }
 
         & .infoTeacher{
-            height: 60%;
+            height: 80%;
         }
+
+        & .infoTeacher.small{
+            max-height: 70%;
+        }
+
         & h1{
-            font-size: 250%;
-            color: $main-color;
-            font-weight: 600;
+            font-size: 200%;
+            font-weight: 400;
             padding-left: 3% ;
         }
 
         & h2{
-            font-size: 150%;
-            color: $white;
-            font-weight: 600;
-            padding-left: 3.5% ;
-            background-color: $main-color;
+            font-size: 110%;
+            font-weight: 400;
+            padding-left: 3.5%;
             margin-bottom: 0;
         }
 
         & h3{
             width: fit-content;
-            font-size: 120%;
-            color: $main-color;
+            font-size: 100%;
             padding-left: 3.5%;
         }
 
         & span{
             display: flex;
+            flex-wrap: wrap;
             justify-content: start;
             align-items: center;
-            gap: 3%;
             height: 5vh;
             margin-top: 0;
             padding: 0;
         }
 
-        &:hover{
-            transform: scale(1.008);
-        }
-
         & .table-cont{
             width: 100%;
             height: 80%;
-            margin-bottom: 1.5%;
             display: flex;
             justify-content: center;
             align-items: start;
@@ -92,56 +91,43 @@
         }
 
         & table{
-            width: 100%;
+            overflow-y: auto;
+            margin-top: 1%;
+            width: 90%;
             height: fit-content;
             border-collapse: collapse;
-            border-bottom: $main-color 0.2vw solid;
+
             & th{
-                background-color: $main-color;
-                color: $white;
-                font-size: 120%;
+                font-size: 110%;
                 font-weight: 600;
-                padding: 1%;
+                padding: 0% 1% 0.5% 1%;
+                border-bottom: 2px solid #696969;
             }
+
+            & tr{
+                border-bottom: #bbb 0.1vw solid;
+                &:last-of-type{
+                    border: none;
+                }
+            }
+
             & td{
                 font-size: 100%;
                 padding: 1%;
-                text-align: center;
-                border-bottom: $main-color 0.1vw solid;
+                text-align: center;                
             }
 
             & button{
                 width:3vw;
                 height: 5vh;
-                background-color: $white;
-                color: $main-color;
-                font-size: 100%;
-                font-weight: 30;
-                border: none;
+                background-color: #ddd;
+                color: #000;
                 border-radius: 0.4vw;
                 cursor: pointer;
                 position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                &:hover{
-                    background-color: $main-color;
-                    color: $main-color;
-                    & svg{
-                        fill: $white;
-                    }
-                }
-                & svg {
-                    width: 500%;
-                    height: 200%;
-                    margin: 0;
-                    padding: 0;
-                    fill: $main-color;
-                    
-                }
-
-                transition: all 0.2s ease-in-out;
-            
             }
 
         }
@@ -155,41 +141,7 @@
 
     & .modal-footer{
         display: flex;
-        justify-content: center;
-        padding-left: 1.5%;
-
-        & button{
-            width: fit-content;
-            height: 5vh;
-            background-color: $main-color;
-            color: $white;
-            font-size: 100%;
-            font-weight: 600;
-            border: none;
-            border-radius: 0.4vw;
-            cursor: pointer;
-            &:hover{
-                background-color: $white;
-                color: $main-color;
-            }
-    
-            &:focus{
-                outline: none;
-            }
-    
-            &:active{
-                outline: none;
-            }
-    
-            &:first-child{
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-            &:last-child{
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-        }
+        width: 100%;
     }
 }
 
@@ -257,23 +209,23 @@
 .button-group button{
     width: fit-content;
     height: 5vh;
-    background-color: $main-color;
-    color: $white;
-    font-size: 100%;
-    font-weight: 600;
-    border: none;
+    background-color: #ddd;
+    color: #000;
+    font-weight: 500;
     border-radius: 0.4vw;
     cursor: pointer;
-    &:hover{
-        background-color: $white;
-        color: $main-color;
-    }
+}
 
-    &:focus{
-        outline: none;
-    }
+.addCourse{
+    justify-self: center;
 
-    &:active{
-        outline: none;
-    }
+}
+
+.modal-footer{
+    margin-bottom: 3.5%;
+}
+
+.addBtn{
+    background-color: #000;
+    color: #fff;
 }

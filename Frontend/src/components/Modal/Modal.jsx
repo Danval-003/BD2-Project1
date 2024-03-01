@@ -5,6 +5,8 @@ import {
 } from '@chakra-ui/react'
 import useApi2 from '../../hooks/useApi2'
 import './Modal.scss'
+import { IoIosClose } from "react-icons/io";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Modal = ({ id, setOpen }) => {
   const [response, loading, handleRequest] = useApi2()
@@ -53,29 +55,35 @@ const Modal = ({ id, setOpen }) => {
 
   const infoTeacher = (
     <>
-      <h1>Teacher courses</h1>
-      <div className="infoTeacher">
+      <div className='header'>
+        <h1>Courses</h1>
+        <button type="button" className='closeModal' onClick={() => setOpen(false)}>
+          <IoIosClose />
+        </button>
+      </div>
+      
+      <div className="infoTeacher small">
         <h2>{`${info.fullName !== '' ? info.fullName : 'Name'}`}</h2>
-        <span>
-          <h3>
-            Age:
-            {info.age}
-          </h3>
-          <h3>
-            Gender:
-            {info.gender}
-          </h3>
-          <h3>
-            School:
-            {info.idSchool}
-          </h3>
-          <h3>
-            Admission Year:
-            {info.admissionYear}
-          </h3>
-        </span>
+        <div className='infoContainer'>
+          <span className='information'>
+            Age:&nbsp;
+            <span className='data'>{info.age}</span>
+          </span>
+          <span className='information'>
+            Gender:&nbsp;
+            <span className='data'>{info.gender}</span>
+          </span>
+          <span className='information'>
+            School:&nbsp;
+            <span className='data'>{info.idSchool}</span>
+          </span>
+          <span className='information'>
+            Admission Year:&nbsp;
+            <span className='data'>{info.admissionYear}</span>
+          </span>
+        </div>
 
-        <div className="table-cont">
+        <div className="table-cont" k>
           <table>
             <thead>
               <tr>
@@ -96,18 +104,8 @@ const Modal = ({ id, setOpen }) => {
                   <td>{course.gradeSection}</td>
                   <td>{course.year}</td>
                   <td>
-                    <button type="button" onClick={() => { handleDelete(course) }}>
-                      {' '}
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 485 485" xmlSpace="preserve">
-                        <g>
-                          <g>
-                            <rect x="67.224" width="350.535" height="71.81" />
-                            <path d="M417.776,92.829H67.237V485h350.537V92.829H417.776z M165.402,431.447h-28.362V146.383h28.362V431.447z M256.689,431.447
-                            h-28.363V146.383h28.363V431.447z M347.97,431.447h-28.361V146.383h28.361V431.447z"
-                            />
-                          </g>
-                        </g>
-                      </svg>
+                    <button type="button" className="trashBtn" onClick={() => { handleDelete(course) }}>
+                      <FaRegTrashAlt />
                     </button>
                   </td>
                 </tr>
@@ -115,10 +113,9 @@ const Modal = ({ id, setOpen }) => {
             </tbody>
           </table>
         </div>
-        <div className="modal-footer">
-          <button type="button" onClick={() => setOpen(false)}>Close</button>
-          <button type="button" onClick={() => setModal(true)}>Add New Course</button>
-        </div>
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="" onClick={() => setModal(true)}>Add Course</button>          
       </div>
     </>
   )
@@ -243,7 +240,10 @@ const Modal = ({ id, setOpen }) => {
   }
   const form = (
     <>
-      <h1>New course</h1>
+      <div className='header'>
+        <h1>Add Course</h1>
+        <button type="button" className='closeModal' onClick={handleReturn}>Return</button>
+      </div>
       <div className="form">
         <div className="form-group">
           <InputGroup>
@@ -295,9 +295,8 @@ const Modal = ({ id, setOpen }) => {
           ) : null}
         </div>
         <div className="button-group">
-          <button type="button" onClick={handleReturn}>Return</button>
           {course.idGrade !== '' && course.name !== '' && course.gradeSection !== ''
-            ? (<button type="button" onClick={handleSend}>Add</button>) : null}
+            ? (<button type="button" className="addBtn" onClick={handleSend}>Save</button>) : null}
         </div>
       </div>
     </>
