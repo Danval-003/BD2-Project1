@@ -1,41 +1,44 @@
-import { useEffect, useState } from "react";
-import { useAPI } from '../../hooks/useAPI';
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react'
+import { useAPI } from '../useAPI'
 
 function useFindById() {
-  const { fetchAPI, error, loading, result } = useAPI();
-  const [data, setData] = useState();
+  const {
+    fetchAPI, error, loading, result,
+  } = useAPI()
+  const [data, setData] = useState()
 
   useEffect(() => {
     if (error) {
-      console.error(`Error fetching document: `, error.status, error.message);
+      console.error('Error fetching document: ', error.status, error.message)
     }
-  }, [error]);
+  }, [error])
 
   useEffect(() => {
-    if (result) setData(result);
+    if (result) setData(result)
   }, [result])
-
 
   const findByID = async (id, collectionName) => {
     const toJSON = {
-      "_id": id
+      _id: id,
     }
 
     await fetchAPI({
-      method: "POST",
+      method: 'POST',
       route: `read/${collectionName}`,
       body: JSON.stringify(toJSON),
       log: false,
       showReply: false,
-    });
-  };
+    })
+  }
 
   return {
     data,
     errorFindID: error,
     loadingFindID: loading,
-    findByID
-  };
+    findByID,
+  }
 }
 
-export { useFindById };
+export { useFindById }

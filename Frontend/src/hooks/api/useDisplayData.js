@@ -1,36 +1,40 @@
-import { useEffect, useState } from "react";
-import { useAPI } from "../useAPI";
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react'
+import { useAPI } from '../useAPI'
 
 function useDisplayData() {
-  const { fetchAPI, error, loading, result } = useAPI();
-  const [displayData, setData] = useState();
+  const {
+    fetchAPI, error, loading, result,
+  } = useAPI()
+  const [displayData, setData] = useState()
 
   useEffect(() => {
     if (error) {
-      console.error(`Error fetching data: `, error.status, error.message);
+      console.error('Error fetching data: ', error.status, error.message)
     }
-  }, [error]);
+  }, [error])
 
   useEffect(() => {
-    if (result) setData(result);
+    if (result) setData(result)
   }, [result])
 
   const displayDataSet = async (collectionName) => {
     await fetchAPI({
-      method: "POST",
+      method: 'POST',
       route: `read/${collectionName}`,
       body: null,
       log: false,
       showReply: false,
-    });
-  };
+    })
+  }
 
   return {
     displayData,
     errorDisplay: error,
     loadingDisplay: loading,
-    displayDataSet
-  };
+    displayDataSet,
+  }
 }
 
-export { useDisplayData };
+export { useDisplayData }

@@ -1,31 +1,34 @@
-import { useEffect, useState } from "react";
-import { useAPI } from '../../hooks/useAPI';
+/* eslint-disable import/prefer-default-export */
+import { useEffect } from 'react'
+import { useAPI } from '../useAPI'
 
 function useInsertDocument() {
-  const { fetchAPI, error, loading, result } = useAPI();
+  const {
+    fetchAPI, error, loading, result,
+  } = useAPI()
 
   useEffect(() => {
     if (error) {
-      console.error(`Error inserting document: `, error.status, error.message);
+      console.error('Error inserting document: ', error.status, error.message)
     }
-  }, [error]);
+  }, [error])
 
   const insertDocument = async (document, collectionName) => {
     await fetchAPI({
-      method: "POST",
+      method: 'POST',
       route: `create/${collectionName}`,
       body: JSON.stringify(document),
       log: false,
       showReply: false,
-    });
-  };
+    })
+  }
 
   return {
     resultInsert: result,
     errorInsert: error,
     loadingInsert: loading,
-    insertDocument
-  };
+    insertDocument,
+  }
 }
 
-export { useInsertDocument };
+export { useInsertDocument }

@@ -1,2 +1,3 @@
-import Teachers from "../Teachers/Teachers"
+import Teachers from './Teachers'
+
 export default Teachers

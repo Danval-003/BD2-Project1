@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-console */
 import { useEffect, useState } from 'react'
 import { useFetch } from './useFetch'
 
@@ -25,6 +28,7 @@ function useAPI() {
     removeContentType = false,
     log = false,
     showReply = false,
+  // eslint-disable-next-line consistent-return
   }) => {
     setLoading(true)
     showReply ? setShowResultTable(true) : setShowResultTable(false)
@@ -46,7 +50,6 @@ function useAPI() {
         signal,
       })
 
-      
       let response
       if (!parseText) response = reply
       else if (toJson) response = await reply.json()

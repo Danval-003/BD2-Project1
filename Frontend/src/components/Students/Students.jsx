@@ -1,96 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import './Students.scss';
+import React, { useState, useEffect } from 'react'
+import './Students.scss'
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel
-} from '@tanstack/react-table';
-import { columns, columnsDict } from './columns.jsx';
-import TableFilters from '../TableFilters';
-import { Button, ButtonGroup, Text, useDisclosure } from '@chakra-ui/react';
-import TableForm from '../TableForm/TableForm';
-import EditModal from '../EditModal';
-import { useDeleteDocument } from "../../hooks/api/useDelete";
-import { useDisplayData } from '../../hooks/api/useDisplayData';
-import { useGlobalSearch } from '../../hooks/api/useGlobalSearch';
+  getPaginationRowModel,
+} from '@tanstack/react-table'
+import {
+  Button, ButtonGroup, Text, useDisclosure,
+} from '@chakra-ui/react'
+import { columns, columnsDict } from './columns.jsx'
+import TableFilters from '../TableFilters'
+import TableForm from '../TableForm/TableForm'
+import EditModal from '../EditModal'
+import { useDeleteDocument } from '../../hooks/api/useDelete'
+import { useDisplayData } from '../../hooks/api/useDisplayData'
+import { useGlobalSearch } from '../../hooks/api/useGlobalSearch'
 
-function Students({ setOpen }) {
-  const [data, setData] = useState();
-  const [element, setElement] = useState();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+const Students = ({ setOpen }) => {
+  const [data, setData] = useState()
+  const [element, setElement] = useState()
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   const {
     deleteDocument,
     resultDeleting,
     errorDeleting,
     loadingDeleteDocument,
-  } = useDeleteDocument();
+  } = useDeleteDocument()
 
   const {
     displayDataSet,
     displayData,
     errorDisplay,
     loadingDisplay,
-  } = useDisplayData();
+  } = useDisplayData()
 
   const {
     globalSearch,
     dataSearch,
     errorGlobSearch,
     loadingGlobSearch,
-  } = useGlobalSearch();
+  } = useGlobalSearch()
 
   const getFilteredData = (query) => {
     if (query.length !== 0) {
-      globalSearch(query, 'students');
+      globalSearch(query, 'students')
     } else {
-      setData(displayData);
+      setData(displayData)
     }
-  };
+  }
 
   useEffect(() => {
-    setData(dataSearch);
-  }, [dataSearch]);
+    setData(dataSearch)
+  }, [dataSearch])
 
   useEffect(() => {
-    setData(displayData);
-  }, [displayData]);
+    setData(displayData)
+  }, [displayData])
 
   useEffect(() => {
     displayDataSet('students')
-  }, [isOpen]);
+  }, [isOpen])
 
   useEffect(() => {
-    displayDataSet('students');
-  }, []);
+    displayDataSet('students')
+  }, [])
 
   const handleEdit = (idElement) => {
-    onOpen();
-    setElement(idElement);
-    displayDataSet('students');
-  };
+    onOpen()
+    setElement(idElement)
+    displayDataSet('students')
+  }
 
   const handleViewCourses = (idElement) => {
     setOpen(idElement)
-    console.log('View Courses Of Element with ID:', idElement);
-  };
+    console.log('View Courses Of Element with ID:', idElement)
+  }
 
   const handleDelete = async (idElement) => {
     try {
-      await deleteDocument(idElement, 'students');
-      displayDataSet('students');
+      await deleteDocument(idElement, 'students')
+      displayDataSet('students')
     } catch (error) {
-      console.error('Error deleting element:', error);
+      console.error('Error deleting element:', error)
     }
-  };
+  }
 
   const table = useReactTable({
     data,
     columns: columns(handleEdit, handleDelete, handleViewCourses),
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
-  });
+    getPaginationRowModel: getPaginationRowModel(),
+  })
 
   return (
     <div className="mainTableContainer">
@@ -99,14 +101,14 @@ function Students({ setOpen }) {
       </div>
       <div className="tableview" w={table.getTotalSize()}>
         <div className="tableHeaders">
-          {table.getHeaderGroups().map(headerGroup => (
-            <div className='tr' key={headerGroup.id}>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <div className="tr" key={headerGroup.id}>
               {headerGroup.headers.map(
-                header => (
-                  <div className='th' w={header.getSize()} key={header.id}>
+                (header) => (
+                  <div className="th" w={header.getSize()} key={header.id}>
                     {header.column.columnDef.header}
                   </div>
-                )
+                ),
               )}
             </div>
           ))}
@@ -114,14 +116,14 @@ function Students({ setOpen }) {
         {!data ? (
           <div className="noResults">No results found.</div>
         ) : (
-          <div className='tableRows'>
-            {table.getRowModel().rows.map(row => (
-              <div className='tr' key={row.id}>
-                {row.getVisibleCells().map(cell => (
-                  <div className='td' w={cell.column.getSize()} key={cell.id}>
+          <div className="tableRows">
+            {table.getRowModel().rows.map((row) => (
+              <div className="tr" key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <div className="td" w={cell.column.getSize()} key={cell.id}>
                     {flexRender(
                       cell.column.columnDef.cell,
-                      cell.getContext()
+                      cell.getContext(),
                     )}
                   </div>
                 ))}
@@ -132,39 +134,48 @@ function Students({ setOpen }) {
       </div>
       <div>
         {data && (
-          <React.Fragment>
-            <Text fontSize='90%'>
-              Page {table.getState().pagination.pageIndex + 1} of {""}
+          <>
+            <Text fontSize="90%">
+              Page
+              {' '}
+              {table.getState().pagination.pageIndex + 1}
+              {' '}
+              of
+              {' '}
+
               {table.getPageCount()}
             </Text>
             <ButtonGroup>
               <Button
-                size='100px'
+                size="100px"
                 onClick={() => table.previousPage()}
                 isDisabled={!table.getCanPreviousPage()}
               >
                 {'<'}
               </Button>
               <Button
-                size='sm'
+                size="sm"
                 onClick={() => table.nextPage()}
                 isDisabled={!table.getCanNextPage()}
               >
                 {'>'}
               </Button>
             </ButtonGroup>
-          </React.Fragment>
+          </>
         )}
       </div>
       <TableForm columns={columnsDict} />
-      {element && <EditModal
-        collectionName={'students'}
-        isStudent={true}
+      {element && (
+      <EditModal
+        collectionName="students"
+        isStudent
         element={element}
         isOpen={isOpen}
-        onClose={onClose} />}
+        onClose={onClose}
+      />
+      )}
     </div>
-  );
+  )
 }
 
-export default Students;
+export default Students

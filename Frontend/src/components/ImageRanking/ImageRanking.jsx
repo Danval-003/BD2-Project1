@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import useApi2 from '../../hooks/useApi2'
 import './ImageRanking.scss'
 
@@ -17,14 +16,10 @@ const ImageRanking = () => {
 
   useEffect(() => {
     if (response.length > 0 && count === -1) {
-      console.log('Nose', response)
       setCount(response.length)
       setListStudents(response)
-      console.log('Nose', listStudents)
     }
   }, [response])
-
-  useEffect(() => { console.log(listStudents) }, [listStudents])
 
   return (
     <div className="imageranking">

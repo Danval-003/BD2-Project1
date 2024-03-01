@@ -1,6 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react'
 import './Queries.scss'
-import { Students, Teachers, Modal, ModalStudent } from '@components'
+import {
+  Students, Teachers, Modal, ModalStudent,
+} from '@components'
 
 const Queries = () => {
   const [modal, setModal] = useState(false)

@@ -229,3 +229,22 @@
     background-color: #000;
     color: #fff;
 }
+
+button {
+    &:focus{
+        outline: none;
+        border: none;
+    }
+
+    &:hover{
+        outline: none;
+        border: transparent;
+    }
+
+    &:active{
+        outline: none;
+        border: none;
+    }
+
+}
+

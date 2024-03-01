@@ -1,16 +1,17 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable import/order */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import useApi2 from '../../hooks/useApi2'
 import './ModalStudent.scss'
-import { IoIosClose } from "react-icons/io";
+import { IoIosClose } from 'react-icons/io'
 
 const ModalStudent = ({ setOpen, id }) => {
-  const [response, loading, handleRequest] = useApi2()
+  const [response, , handleRequest] = useApi2()
   const [info, setInfo] = useState({
     admissionYear: null, age: 0, courses: [], fullName: '', idSchool: '', gender: '',
   })
   const [count, setCount] = useState(0)
-  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     if (count === 0) {
@@ -28,35 +29,35 @@ const ModalStudent = ({ setOpen, id }) => {
 
   const infoTeacher = (
     <>
-      <div className='header'>
+      <div className="header">
         <h1>Courses</h1>
-        <button type="button" className='closeModal' onClick={() => setOpen(false)}>
+        <button type="button" className="closeModal" onClick={() => setOpen(false)}>
           <IoIosClose />
         </button>
       </div>
 
       <div className="infoTeacher">
         <h2>{`${info.fullName !== '' ? info.fullName : 'Name'}`}</h2>
-        <div className='infoContainer'>
-          <span className='information'>
+        <div className="infoContainer">
+          <span className="information">
             Age:&nbsp;
-            <span className='data'>{info.age}</span>
+            <span className="data">{info.age}</span>
           </span>
-          <span className='information'>
+          <span className="information">
             Gender:&nbsp;
-            <span className='data'>{info.gender}</span>
+            <span className="data">{info.gender}</span>
           </span>
-          <span className='information'>
+          <span className="information">
             School:&nbsp;
-            <span className='data'>{info.idSchool.idSchool}</span>
+            <span className="data">{info.idSchool.idSchool}</span>
           </span>
-          <span className='information'>
+          <span className="information">
             Admission Year:&nbsp;
-            <span className='data'>{info.admissionYear}</span>
+            <span className="data">{info.admissionYear}</span>
           </span>
-          <span className='information'>
+          <span className="information">
             Grade Section:&nbsp;
-            <span className='data'>{info.gradeSection}</span>
+            <span className="data">{info.gradeSection}</span>
           </span>
         </div>
 
@@ -76,7 +77,7 @@ const ModalStudent = ({ setOpen, id }) => {
                 <tr key={course}>
                   <td>{course.idCourse}</td>
                   <td>{course.idGrade}</td>
-                  <td>{course.percentGrade!== null? course.percentGrade: 'N.A'}</td>
+                  <td>{course.percentGrade !== null ? course.percentGrade : 'N.A'}</td>
                   <td>{course.section}</td>
                   <td>{course.year}</td>
                 </tr>

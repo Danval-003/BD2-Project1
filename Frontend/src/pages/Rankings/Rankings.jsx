@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react'
@@ -98,17 +99,12 @@ const Rankings = () => {
     setCarrouselKey(carrouselKey + 1)
   }, [newCards])
 
-  useEffect(() => {
-    console.log(newCards)
-    console.log('tamano', newCards.length)
-  }, [carrouselKey])
-
   const content = (
-    <div className='content-container'>
+    <div className="content-container">
       <div className="carrousel-container">
         {carrousel}
       </div>
-      <div className='image-ranking-container'>
+      <div className="image-ranking-container">
         <ImageRanking />
       </div>
     </div>
