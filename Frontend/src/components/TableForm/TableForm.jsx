@@ -72,19 +72,8 @@ const TableForm = ({ columns }) => {
     }));
   }
 
-  const {
-    getCourses,
-    data,
-    errorGetCourses,
-    loadingGetCourses,
-  } = useGetCourses();
-
-  const {
-    insertDocument,
-    resultInsert,
-    errorInsert,
-    loadingInsert,
-  } = useInsertDocument();
+  const { getCourses, data } = useGetCourses();
+  const { insertDocument } = useInsertDocument();
 
 
   useEffect(() => {
