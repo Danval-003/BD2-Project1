@@ -285,7 +285,7 @@ const Modal = ({ id, setOpen }) => {
               </InputGroup>
               <InputGroup>
                 <Select
-                  placeholder="Select Course"
+                  placeholder="Select Section"
                   value={course.gradeSection}
                   name="gradeSection"
                   onChange={handleInputChange}
