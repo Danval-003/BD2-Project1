@@ -65,7 +65,8 @@ The project is a web application designed for the administration of various stud
 ### Database
 
 The application uses MongoDB with a cloud instance for data management.
-![image](https://github.com/Danval-003/BD2-Project1/assets/77825594/cc9474c8-21af-42c7-bf93-5ed021e07e41)
+
+<img src="https://github.com/Danval-003/BD2-Project1/assets/77825594/cc9474c8-21af-42c7-bf93-5ed021e07e41" alt="Nombre alternativo para la imagen" width="600"/>
 
 The following collections are present in the database:
 
